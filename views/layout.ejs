@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body style="background-color: #FFF6F8;">
+    <div class="d-flex min-vh-100">
+      <%- include('partials/sidebar') %>
+
+      <div class="flex-grow-1 d-flex flex-column">
+        <%- include('partials/navbar') %>
+
+        <main class="flex-grow-1 p-4">
+          <%- body %>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
+

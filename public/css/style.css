@@ -1,0 +1,43 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #FFF6F8;
+  }
+  
+  .navbar-brand {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  aside {
+    min-height: 100vh;
+    background-color: #FE829F;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  input.form-control {
+    max-width: 400px;
+  }
+  
+  .table th, .table td {
+    vertical-align: middle;
+  }
+  
+  .text-pink {
+    color: #FE829F;
+    font-weight: bold;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    border: none;
+  }
