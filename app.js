@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static("public"));
 
 // Serve an HTML page
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
     res.sendFile(path.join(__dirname, "test.html"));
 });
 
