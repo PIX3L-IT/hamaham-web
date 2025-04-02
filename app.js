@@ -8,7 +8,7 @@ app.use(express.static("public"));
 
 // Serve an HTML page
 app.get("/test", (req, res) => {
-    res.sendFile(path.join(__dirname, "test.html"));
+    res.send("🚀 Hello from /test!");
 });
 
 // Start server
