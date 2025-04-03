@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
 
+require("dotenv").config()
+
 const app = express();
 
 // Serve static files (optional, if you have CSS/JS)
