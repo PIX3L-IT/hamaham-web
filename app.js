@@ -8,7 +8,7 @@ app.use(express.static("public"));
 
 // Serve an HTML page
 app.get("/test", (req, res) => {
-    res.send("🚀 Hello from /test!");
+    res.send("levi fanpage");
 });
 
 // Start server
