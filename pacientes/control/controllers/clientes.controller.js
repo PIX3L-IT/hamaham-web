@@ -1,4 +1,5 @@
 const axios = require('axios');
+require("dotenv").config();
 
 // Agregar Cliente
 exports.get_agregar_cliente = async (req, res, next) => {
@@ -24,8 +25,8 @@ exports.post_agregar_cliente = async (req, res, next) => {
             clientData, 
             {
                 auth: {
-                    username: "levi102",
-                    password: "Fisi0*"
+                    username: process.env.FACTURAMA_USERNAME,
+                    password: process.env.FACTURAMA_PASSWORD
                 },
                 headers: {
                     'Content-Type': 'application/json'
@@ -48,8 +49,8 @@ exports.get_lista_clientes = async (req, res, next) => {
     try {
         const response = await axios.get('https://apisandbox.facturama.mx/Clients/', {
             auth: {
-                username: 'levi102',
-                password: 'Fisi0*'
+                username: process.env.FACTURAMA_USERNAME,
+                password: process.env.FACTURAMA_PASSWORD
             },
             headers: {
                 'Content-Type': 'application/json'
@@ -66,8 +67,8 @@ exports.get_ver_clientes = async (req, res, next) => {
     try {
         const response = await axios.get('https://apisandbox.facturama.mx/Clients/', {
             auth: {
-                username: 'levi102',
-                password: 'Fisi0*'
+                username: process.env.FACTURAMA_USERNAME,
+                password: process.env.FACTURAMA_PASSWORD
             },
             headers: {
                 'Content-Type': 'application/json'
@@ -87,8 +88,8 @@ exports.get_info_cliente = async (req, res, next) => {
 
         const response = await axios.get(`https://apisandbox.facturama.mx/client/${id}`, {
             auth: {
-                username: 'levi102',
-                password: 'Fisi0*'
+                username: process.env.FACTURAMA_USERNAME,
+                password: process.env.FACTURAMA_PASSWORD
             },
             headers: {
                 'Content-Type': 'application/json'
@@ -128,8 +129,8 @@ exports.put_editar_cliente = async (req, res, next) => {
             clientData, 
             {
                 auth: {
-                    username: "levi102",
-                    password: "Fisi0*"
+                    username: process.env.FACTURAMA_USERNAME,
+                    password: process.env.FACTURAMA_PASSWORD
                 },
                 headers: {
                     'Content-Type': 'application/json'
@@ -168,8 +169,8 @@ exports.delete_eliminar_cliente = async (req, res, next) => {
         const response = await axios.delete(`https://apisandbox.facturama.mx/Client/${req.params.id}`,
             {
                 auth: {
-                    username: "levi102",
-                    password: "Fisi0*"
+                    username: process.env.FACTURAMA_USERNAME,
+                    password: process.env.FACTURAMA_PASSWORD
                 },
                 headers: {
                     'Content-Type': 'application/json'
