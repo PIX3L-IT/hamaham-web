@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+</head>
+<body>
+    <h1>Lista</h1>
+    <a href="/facturama/agregar-cliente">Agregar Cliente</a>
+    <div id="lista">
+
+    </div>
+</body>
+<script>
+    const lista = document.getElementById('lista');
+    fetch('/facturama/clientes/get-clients')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        for (let user of data.data) {
+            console.log(user.Name);
+            lista.innerHTML += `
+                <li>
+                ${user.Name} <a href="/facturama/editar-cliente/${user.Id}">Editar</a> <a href="/facturama/consultar-cliente/${user.Id}">Consultar</a>
+                </li>
+            `
+        }
+    })
+</script>
+</html>
