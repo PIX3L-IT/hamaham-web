@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar Usuario</title>
+</head>
+<body>
+  <h1>Editar Usuario</h1>
+  <form action="/patients/edit/<%= patient._id %>" method="POST">
+    <p>IdPatient: <input type="text" name="IdPatient" value="<%= patient.IdPatient %>" /></p>
+    <p>Email: <input type="email" name="Email" value="<%= patient.Email %>" required /></p>
+    <p>Nombre: <input type="text" name="Nombre" value="<%= patient.Name %>" /></p>
+    <button type="submit">Actualizar</button>
+  </form>
+</body>
+</html>

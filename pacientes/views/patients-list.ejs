@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de patients</title>
+</head>
+<body>
+  <h1>patients</h1>
+  <a href="/patients/create">Crear nuevo patient</a>
+  <ul>
+    <% patients.forEach(patient => { %>
+      <li>
+        <strong><%= patient.Name %></strong> (<%= patient.Email %>)
+        | <a href="/patients/edit/<%= patient._id %>">Editar</a>
+        | <a href="/patients/delete/<%= patient._id %>">Eliminar</a>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
