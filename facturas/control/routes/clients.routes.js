@@ -5,26 +5,26 @@ const router = express.Router();
 
 
 // Agregar Cliente
-router.get('/facturama/agregar-cliente', clienteController.get_agregar_cliente);
+router.get('/facturama/agregar-cliente', clienteController.getAddClient);
 
-router.post('/facturama/agregar-cliente', clienteController.post_agregar_cliente);
+router.post('/facturama/agregar-cliente', clienteController.postAddClient);
 
 // Ver Clientes
-router.get('/facturama/clientes/get-clients', clienteController.get_lista_clientes);
+router.get('/facturama/clientes/get-clients', clienteController.getClientList);
 
-router.get('/facturama/clientes', clienteController.get_ver_clientes);
+router.get('/facturama/clientes', clienteController.getSeeClients);
 
 // Editar Cliente
-router.get('/facturama/editar-cliente-info/:id', clienteController.get_info_cliente);
+router.get('/facturama/editar-cliente-info/:id', clienteController.getClientInfo);
 
-router.get('/facturama/editar-cliente/:id', clienteController.get_editar_cliente);
+router.get('/facturama/editar-cliente/:id', clienteController.getEditClient);
 
-router.put('/facturama/editar-cliente/:id', clienteController.put_editar_cliente);
+router.put('/facturama/editar-cliente/:id', clienteController.putEditClient);
 
 // Eliminar cliente
 
-router.get('/facturama/consultar-cliente/:id', clienteController.get_eliminar_cliente);
+router.get('/facturama/consultar-cliente/:id', clienteController.getDeleteClient);
 
-router.delete('/facturama/eliminar-cliente/:id', clienteController.delete_eliminar_cliente);
+router.delete('/facturama/eliminar-cliente/:id', clienteController.deleteDeleteClient);
 
 module.exports = router;
