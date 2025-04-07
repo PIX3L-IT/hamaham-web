@@ -1,9 +1,12 @@
 const express = require('express');
 const path = require("path");
 const axios = require('axios');
-require("dotenv").config();
-
+const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
 const app = express();
+const connectDB = require('./config/mongoose');
+
+require("dotenv").config();
+connectDB();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'facturas', 'views'));
@@ -14,6 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("", require('./facturas/control/routes/clients.routes'));
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server running at http://localhost:${process.env.PORT}`);
-})
+
+app.use('/', pacientesRoutes);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
