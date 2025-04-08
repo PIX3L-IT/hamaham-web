@@ -24,7 +24,10 @@ app.configure(configuration());
 
 // Configura EJS
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, './pacientes/views'));
+app.set('views', [
+  path.join(__dirname, 'pacientes/views'),
+  path.join(__dirname, 'usuarios/views')
+]);
 
 // Middlewares básicos
 app.use(cors());
@@ -46,8 +49,12 @@ app.configure(mongooseConfig);
 // Configura Feathers REST (crea endpoints /serviceName)
 app.configure(rest());
 
-const { patientService } = require('./pacientes/control/services/service');
+const { patientService } = require('./pacientes/control/services/patient.service');
 app.configure(patientService);
+const { userService } = require('./usuarios/control/services/user.service');
+app.configure(userService);
+const { permissionService } = require('./usuarios/control/services/permission.service');
+app.configure(permissionService);
 
 // Hooks globales de Feathers 
 app.hooks({
@@ -61,6 +68,8 @@ app.hooks({
 
 const patientsSession = require('./pacientes/control/routes/patients.routes');
 app.use('/patients', patientsSession);
+const userSession = require('./usuarios/control/routes/users.routes');
+app.use('/users', userSession);
 
 // Manejo de 404 y errores
 app.use(notFound());
