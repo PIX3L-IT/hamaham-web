@@ -4,7 +4,7 @@ const { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = 
 
 exports.getLogin = async (req, res, next) => {
 	try {
-		res.render('login_test')
+		res.render('login')
 	} catch(error) {
 		console.log("[GET_LOGIN]", error)
 	}
@@ -12,7 +12,7 @@ exports.getLogin = async (req, res, next) => {
 
 exports.getSignUp = async (req, res, next) => {
 	try {
-		res.render('registrar_test')
+		res.render('signup')
 	} catch(error) {
 		console.log("[GET_REGISTRAR]", error)
 	}
