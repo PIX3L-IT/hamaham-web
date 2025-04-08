@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <a href="/facturama/clientes">Lista</a>
+    <a href="/clientes">Lista</a>
     <form id="clienteForm">
         <label for="">Correo</label>
         <input type="text" name="Email">
@@ -73,7 +73,7 @@
 
             console.log(JSON.stringify(data, null, 2));
 
-            fetch("/facturama/agregar-cliente", {
+            fetch("/agregar-cliente", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
