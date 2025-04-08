@@ -2,7 +2,7 @@ const { app } = require('../../../firebase');
 const { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = require("@firebase/auth");
 
 
-exports.get_login = async (req, res, next) => {
+exports.getLogin = async (req, res, next) => {
 	try {
 		res.render('login_test')
 	} catch(error) {
@@ -10,7 +10,7 @@ exports.get_login = async (req, res, next) => {
 	}
 }
 
-exports.get_registrar = async (req, res, next) => {
+exports.getSignUp = async (req, res, next) => {
 	try {
 		res.render('registrar_test')
 	} catch(error) {
@@ -18,7 +18,7 @@ exports.get_registrar = async (req, res, next) => {
 	}
 }
 
-exports.post_login = async (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
 	try {
         console.log(req.body);
 		const auth = getAuth(app);
@@ -40,7 +40,7 @@ exports.post_login = async (req, res, next) => {
 	}
 }
 
-exports.post_registrar = async (req, res, next) => {
+exports.postSignUp = async (req, res, next) => {
 	try {
 		const auth = getAuth(app);
 		// Función para registrar usuario en base de datos de firebase
