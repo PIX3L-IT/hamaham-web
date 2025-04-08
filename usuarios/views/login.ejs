@@ -8,6 +8,7 @@
 <body>
     <h1>Login</h1>
     <form action="/usuario/login" id="loginForm" method="POST">
+        <input type="hidden" name="token" id="token" />
         <label for="">Email</label>
         <input type="text" name="email" id="email" placeholder="Email">
         <br>

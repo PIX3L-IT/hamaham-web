@@ -28,16 +28,18 @@ exports.getSignUp = async (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
 	try {
 		// Función para iniciar sesión con Firebase
-		const idToken = req.headers.authorization?.split('Bearer ')[1];
+		const { token, email } = req.body;
+        const firebaseID = await admin.auth().verifyIdToken(token);
 
-		if (!idToken) {
-			return res.status(400).send('Error al iniciar sesión: No hay Token');
-		}
+		const expiresIn = 60 * 60 * 1000; // 1 hora (en milisegundos);
+		const sessionCookie = await admin.auth().createSessionCookie(token, { expiresIn });
 
-		const decodedToken = await admin.auth().verifyIdToken(idToken);
-		const uid = decodedToken.uid;
+		res.cookie('session', sessionCookie, {
+			maxAge: expiresIn,
+			httpOnly: true,
+			secure: false
+		})
 
-		console.log("Token verified. UID:", uid);
 		res.send('Éxito al iniciar sesión');
 	} catch(error) {
 		console.log("[POST_LOGIN]", error)
