@@ -25,16 +25,10 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { firebaseConfig } from "/js/firebase-config.js";
 
-    const firebaseConfig = {
-        apiKey: "<%= apiKey %>",
-        authDomain: "<%= authDomain %>",
-        projectId: "<%= projectId %>",
-        storageBucket: "<%= storageBucket %>",
-        messagingSenderId: "<%= messagingSenderId %>",
-        appId: "<%= appId %>"
-    };
-
+    console.log(firebaseConfig);
+    
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const Form = document.getElementById('loginForm');
