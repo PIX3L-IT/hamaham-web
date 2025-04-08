@@ -9,7 +9,8 @@ exports.getLogin = async (req, res, next) => {
 			projectId: process.env.PROJECT_ID,
 			storageBucket: process.env.STORAGE_BUCKET,
 			messagingSenderId: process.env.MESSAGING_SENDER_ID,
-			appId: process.env.APP_ID
+			appId: process.env.APP_ID,
+			error: '',
 		})
 	} catch(error) {
 		console.log("[GET_LOGIN]", error)
@@ -39,8 +40,10 @@ exports.postLogin = async (req, res, next) => {
 		console.log("Token verified. UID:", uid);
 		res.send('Éxito al iniciar sesión');
 	} catch(error) {
-		res.send('Error al iniciar sesión');
 		console.log("[POST_LOGIN]", error)
+		res.render('login', {
+			error: 'Error al iniciar sesión'
+		})
 	}
 }
 

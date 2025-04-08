@@ -16,7 +16,11 @@
         <br>
         <input type="submit" value="Submit">
     </form>
-    <div id="msg"></div>
+    <div id="msg">
+        <% if(error){ %>
+            <%= error %>
+        <% } %>
+    </div>
 </body>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
@@ -60,7 +64,7 @@
                 
             })
             .catch((error) => {
-                document.getElementByID('msg').innerHTML = "Error al iniciar sesión" + error.message
+                document.getElementById('msg').innerHTML = "Error al iniciar sesión" + error.message
                 console.log("Error", error.message);
             });
         })
