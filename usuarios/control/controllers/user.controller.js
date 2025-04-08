@@ -49,13 +49,11 @@ exports.postLogin = async (req, res, next) => {
 
 exports.postSignUp = async (req, res, next) => {
 	try {
-		const { token, email, password } = req.body;
+		const { token, userId, email, name } = req.body;
         const firebaseID = await admin.auth().verifyIdToken(token);
-        console.log('Token:', token);  
 		
 		const expiresIn = 60 * 60 * 1000; // 1 hora (en milisegundos);
 		const sessionCookie = await admin.auth().createSessionCookie(token, { expiresIn });
-		console.log("Session Cookie:", sessionCookie);
 
 		res.cookie('session', sessionCookie, {
 			maxAge: expiresIn,
