@@ -19,7 +19,7 @@ app.get("/test", (req, res) => {
     res.send("testing testing levi fanpage");
 });
 
-app.use("", require("./usuarios/control/routes/user.routes"));
+app.use("/usuario", require("./usuarios/control/routes/user.routes"));
 
 // Start server
 const PORT = 3000;
