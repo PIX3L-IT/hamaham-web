@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+console.log('📦 Rutas de pacientes cargadas');
 const Patient = require('../../models/patient.model');
 
 router.get('/add-patient', (req, res) => {
