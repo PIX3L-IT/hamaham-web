@@ -7,14 +7,16 @@
 </head>
 <body>
     <h1>Sign Up</h1>
-    <form action="/usuario/registrar" method="POST">
+    <form action="/usuario/registrar" id="signupForm" method="POST">
+        <input type="hidden" name="token" id="token" />
         <label for="">Email</label>
-        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="email" id="email" placeholder="Email">
         <br>
         <label for="">Password</label>
-        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password" id="password" placeholder="Password">
         <br>
         <input type="submit" value="Submit">
     </form>
 </body>
+<script type="module" src="/scripts/signup.js"></script>
 </html>

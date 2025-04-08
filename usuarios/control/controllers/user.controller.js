@@ -49,15 +49,10 @@ exports.postLogin = async (req, res, next) => {
 
 exports.postSignUp = async (req, res, next) => {
 	try {
-		const { email, password } = req.body;
+		const { token, email, password } = req.body;
+        const firebaseID = await admin.auth().verifyIdToken(token);
+        console.log('Token:', token);   
 
-		const user = await admin.auth().createUser({
-			email,
-			password
-		});
-
-		console.log('Usuario creado:', user.email);
-		res.send('Éxito con registro');
 	} catch(error) {
 		console.log("[POST_REGISTRAR]", error)
 	}
