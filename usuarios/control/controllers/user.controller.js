@@ -3,7 +3,14 @@ const admin = require('../../../firebase');
 
 exports.getLogin = async (req, res, next) => {
 	try {
-		res.render('login')
+		res.render('login', {
+			apiKey: process.env.API_KEY,
+			authDomain: process.env.AUTH_DOMAIN,
+			projectId: process.env.PROJECT_ID,
+			storageBucket: process.env.STORAGE_BUCKET,
+			messagingSenderId: process.env.MESSAGING_SENDER_ID,
+			appId: process.env.APP_ID
+		})
 	} catch(error) {
 		console.log("[GET_LOGIN]", error)
 	}
@@ -17,27 +24,25 @@ exports.getSignUp = async (req, res, next) => {
 	}
 }
 
-// exports.postLogin = async (req, res, next) => {
-// 	try {
-// 		const auth = getAuth(app);
-// 		// Función para iniciar sesión con Firebase
-// 		signInWithEmailAndPassword(auth, req.body.email, req.body.password)
-// 		  .then((userCredential) => {
-// 		    // Signed in 
-// 		    const user = userCredential.user;
-//             console.log("Exito");
-// 			res.send('Éxito en Login');
-// 		  })
-// 		  .catch((error) => {
-// 		    const errorCode = error.code;
-// 		    const errorMessage = error.message;
-//             console.log('Login:', errorMessage);
-// 			res.send('Error al hacer login');
-// 		  });
-// 	} catch(error) {
-// 		console.log("[POST_LOGIN]", error)
-// 	}
-// }
+exports.postLogin = async (req, res, next) => {
+	try {
+		// Función para iniciar sesión con Firebase
+		const idToken = req.headers.authorization?.split('Bearer ')[1];
+
+		if (!idToken) {
+			return res.status(400).send('Error al iniciar sesión: No hay Token');
+		}
+
+		const decodedToken = await admin.auth().verifyIdToken(idToken);
+		const uid = decodedToken.uid;
+
+		console.log("Token verified. UID:", uid);
+		res.send('Éxito al iniciar sesión');
+	} catch(error) {
+		res.send('Error al iniciar sesión');
+		console.log("[POST_LOGIN]", error)
+	}
+}
 
 exports.postSignUp = async (req, res, next) => {
 	try {
