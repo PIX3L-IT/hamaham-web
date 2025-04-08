@@ -7,14 +7,14 @@
 </head>
 <body>
     <h1>Lista</h1>
-    <a href="/facturama/agregar-cliente">Agregar Cliente</a>
+    <a href="/clientes/agregar-cliente">Agregar Cliente</a>
     <div id="lista">
 
     </div>
 </body>
 <script>
     const lista = document.getElementById('lista');
-    fetch('/facturama/clientes/get-clients')
+    fetch('/clientes/get-clients')
     .then(response => response.json())
     .then(data => {
         console.log(data);
@@ -22,7 +22,7 @@
             console.log(user.Name);
             lista.innerHTML += `
                 <li>
-                ${user.Name} <a href="/facturama/editar-cliente/${user.Id}">Editar</a> <a href="/facturama/consultar-cliente/${user.Id}">Consultar</a>
+                ${user.Name} <a href="/clientes/editar-cliente/${user.Id}">Editar</a> <a href="/clientes/consultar-cliente/${user.Id}">Consultar</a>
                 </li>
             `
         }

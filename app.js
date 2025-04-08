@@ -41,7 +41,7 @@ const clientsRoutes = require('./facturas/control/routes/clients.routes');
 const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
 
 app.use("/usuario", require("./usuarios/control/routes/user.routes")); // Ahora montado en /usuario
-app.use('/clientes', clientsRoutes);         // Ahora montado en /clientes
+app.use('/clientes', clientsRoutes);         // Ahora montado en /facturama
 app.use('/pacientes', pacientesRoutes);      // Ahora montado en /pacientes
 
 // Redirección opcional si alguien entra a /
