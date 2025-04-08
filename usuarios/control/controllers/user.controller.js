@@ -20,20 +20,20 @@ exports.getSignUp = async (req, res, next) => {
 
 exports.postLogin = async (req, res, next) => {
 	try {
-        console.log(req.body);
 		const auth = getAuth(app);
 		// Función para iniciar sesión con Firebase
 		signInWithEmailAndPassword(auth, req.body.email, req.body.password)
 		  .then((userCredential) => {
 		    // Signed in 
 		    const user = userCredential.user;
-		    // ...
             console.log("Exito");
+			res.send('Éxito en Login');
 		  })
 		  .catch((error) => {
 		    const errorCode = error.code;
 		    const errorMessage = error.message;
             console.log('Login:', errorMessage);
+			res.send('Error al hacer login');
 		  });
 	} catch(error) {
 		console.log("[POST_LOGIN]", error)
@@ -49,13 +49,13 @@ exports.postSignUp = async (req, res, next) => {
             // Signed up 
             const user = userCredential.user;
             console.log("Éxito con registro");
-            // ...
+			res.send('Éxito con Registro');
             })
             .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log('Registrar:', errorMessage);
-            // ..
+			res.send('Error al registrar');
             });
 	} catch(error) {
 		console.log("[POST_REGISTRAR]", error)
