@@ -16,7 +16,7 @@ function mongooseConfig(app) {
 
   // Si quieres acceder a la instancia en otras partes vía app:
   app.set('mongooseClient', mongoose);
-}
+};
 
 module.exports = {
   mongooseConfig

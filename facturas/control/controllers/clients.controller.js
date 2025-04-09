@@ -2,7 +2,7 @@ const axios = require('axios');
 require("dotenv").config();
 
 // Agregar Cliente
-exports.get_agregar_cliente = async (req, res, next) => {
+exports.getAddClient = async (req, res, next) => {
     try {
         res.render('add-client');
     } catch (error) {
@@ -11,7 +11,7 @@ exports.get_agregar_cliente = async (req, res, next) => {
     }
 }
 
-exports.post_agregar_cliente = async (req, res, next) => {
+exports.postAddClient = async (req, res, next) => {
     try {
         const clientData = {
             Email: req.body.Email,
@@ -45,7 +45,7 @@ exports.post_agregar_cliente = async (req, res, next) => {
 };
 
 // Ver Clientes
-exports.get_lista_clientes = async (req, res, next) => {
+exports.getClientList = async (req, res, next) => {
     try {
         const response = await axios.get('https://apisandbox.facturama.mx/Clients/', {
             auth: {
@@ -63,7 +63,7 @@ exports.get_lista_clientes = async (req, res, next) => {
     }
 }
 
-exports.get_ver_clientes = async (req, res, next) => {
+exports.getSeeClients = async (req, res, next) => {
     try {
         const response = await axios.get('https://apisandbox.facturama.mx/Clients/', {
             auth: {
@@ -82,7 +82,7 @@ exports.get_ver_clientes = async (req, res, next) => {
 }
 
 // Editar Cliente
-exports.get_info_cliente = async (req, res, next) => {
+exports.getClientInfo = async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -102,7 +102,7 @@ exports.get_info_cliente = async (req, res, next) => {
     }
 };
 
-exports.get_editar_cliente = async (req, res, next) => {
+exports.getEditClient = async (req, res, next) => {
     try {
         res.render('edit-client', {
             id: req.params.id,
@@ -113,7 +113,7 @@ exports.get_editar_cliente = async (req, res, next) => {
     }
 }
 
-exports.put_editar_cliente = async (req, res, next) => {
+exports.putEditClient = async (req, res, next) => {
     try {
         const clientData = {
             Id: req.params.id,
@@ -150,7 +150,7 @@ exports.put_editar_cliente = async (req, res, next) => {
 
 // Eliminar cliente
 
-exports.get_eliminar_cliente = async (req, res, next) => {
+exports.getDeleteClient = async (req, res, next) => {
     try {
         res.render('consult-client', 
             {
@@ -163,7 +163,7 @@ exports.get_eliminar_cliente = async (req, res, next) => {
     }
 }
 
-exports.delete_eliminar_cliente = async (req, res, next) => {
+exports.deleteDeleteClient = async (req, res, next) => {
     try {
 
         const response = await axios.delete(`https://apisandbox.facturama.mx/Client/${req.params.id}`,

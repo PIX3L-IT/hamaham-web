@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form action="/usuario/registrar" id="signupForm" method="POST">
+        <input type="hidden" name="token" id="token" />
+        <p>IDUsuario: <input type="text" name="userId" id="IDUsuario" /></p>
+        <p>Email: <input type="email" name="email" id="email" required /></p>
+        <p>Password: <input type="password" id="password" required /></p>
+        <p>Nombre: <input type="text" name="name" id="nombre" /></p>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+<script type="module" src="/scripts/signup.js"></script>
+</html>

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <a href="/facturama/clientes">Lista</a>
+    <a href="/clientes">Lista</a>
     <form id="clienteForm">
         <label for="">Correo</label>
         <input type="text" name="Email" value="">
@@ -50,7 +50,7 @@
     <script>
         const clientId = "<%= id %>"
 
-        fetch(`/facturama/editar-cliente-info/${clientId}`)
+        fetch(`/clientes/editar-cliente-info/${clientId}`)
         .then(response => response.json())
         .then(client => {
             document.querySelector('input[name="Email"]').value = client.Email || ''
@@ -94,7 +94,7 @@
 
             console.log(JSON.stringify(data, null, 2));
 
-            fetch(`/facturama/editar-cliente/${clientId}`, {
+            fetch(`/clientes/editar-cliente/${clientId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

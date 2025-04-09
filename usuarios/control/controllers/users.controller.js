@@ -16,7 +16,7 @@ exports.getPermissions = async (request, response, next) => {
 
 exports.postEditPermissions = async (request, response, next) => {
     try {
-      const firebaseUID = request.params.id;
+      const firebaseUID = request.params.firebaseUID;
       const result = await request.app.service('api/users').find({
         query: {
           firebaseUID: firebaseUID,
@@ -28,7 +28,7 @@ exports.postEditPermissions = async (request, response, next) => {
       //const { adminUsers, bills, patients, statistics } = request.body;
       const adminUsers = true;
       const bills = true;
-      const patients = true;
+      const patients = false;
       const statistics = true;
     
       const permissions = [];

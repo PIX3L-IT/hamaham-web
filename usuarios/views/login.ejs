@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/usuario/login" id="loginForm" method="POST">
+        <input type="hidden" name="token" id="token" />
+        <label for="">Email</label>
+        <input type="text" name="email" id="email" placeholder="Email">
+        <br>
+        <label for="">Password</label>
+        <input type="password" name="password" id="password" placeholder="Password">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <div id="msg">
+        <% if(error){ %>
+            <%= error %>
+        <% } %>
+    </div>
+</body>
+<script type="module" src="/scripts/firebase-init.js"></script>
+<script type="module" src="/scripts/login.js"></script>
+</html>

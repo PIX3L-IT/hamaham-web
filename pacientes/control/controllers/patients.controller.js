@@ -46,6 +46,7 @@ exports.post_modificar_patient = async (request, response, next) => {
     try {
         const id = request.params.id;
         const { IdPatient, Email, Name } = request.body;
+        console.log("NAME", Email);
         // Actualiza solo campos específicos con patch
         await request.app.service('api/patients').patch(
             id,
