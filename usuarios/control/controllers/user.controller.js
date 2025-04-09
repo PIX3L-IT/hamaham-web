@@ -1,18 +1,31 @@
-const { app } = require('../../../firebase');
-const { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } = require("@firebase/auth");
+const admin = require('../../../firebase');
 
 
 exports.getLogin = async (req, res, next) => {
 	try {
-		res.render('login')
+		const users = await req.app.service('/api/usuario').find({
+			headers: {
+				cookie: req.headers.cookie
+			}
+		})
+		res.render('login', {
+			apiKey: process.env.API_KEY,
+			authDomain: process.env.AUTH_DOMAIN,
+			projectId: process.env.PROJECT_ID,
+			storageBucket: process.env.STORAGE_BUCKET,
+			messagingSenderId: process.env.MESSAGING_SENDER_ID,
+			appId: process.env.APP_ID,
+			error: '',
+		})
 	} catch(error) {
 		console.log("[GET_LOGIN]", error)
+		res.send(error.message);
 	}
 }
 
 exports.getSignUp = async (req, res, next) => {
 	try {
-		res.render('signup')
+		res.render('signup');
 	} catch(error) {
 		console.log("[GET_REGISTRAR]", error)
 	}
@@ -20,44 +33,46 @@ exports.getSignUp = async (req, res, next) => {
 
 exports.postLogin = async (req, res, next) => {
 	try {
-		const auth = getAuth(app);
 		// Función para iniciar sesión con Firebase
-		signInWithEmailAndPassword(auth, req.body.email, req.body.password)
-		  .then((userCredential) => {
-		    // Signed in 
-		    const user = userCredential.user;
-            console.log("Exito");
-			res.send('Éxito en Login');
-		  })
-		  .catch((error) => {
-		    const errorCode = error.code;
-		    const errorMessage = error.message;
-            console.log('Login:', errorMessage);
-			res.send('Error al hacer login');
-		  });
+		const { token, email } = req.body;
+        const firebaseID = await admin.auth().verifyIdToken(token);
+
+		const expiresIn = 60 * 60 * 1000; // 1 hora (en milisegundos);
+		const sessionCookie = await admin.auth().createSessionCookie(token, { expiresIn });
+
+		res.cookie('session', sessionCookie, {
+			maxAge: expiresIn,
+			httpOnly: true,
+			secure: false
+		})
+
+		res.send('Éxito al iniciar sesión');
 	} catch(error) {
 		console.log("[POST_LOGIN]", error)
+		res.render('login', {
+			error: 'Error al iniciar sesión'
+		})
 	}
 }
 
 exports.postSignUp = async (req, res, next) => {
 	try {
-		const auth = getAuth(app);
-		// Función para registrar usuario en base de datos de firebase
-		createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
-            .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            console.log("Éxito con registro");
-			res.send('Éxito con Registro');
-            })
-            .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log('Registrar:', errorMessage);
-			res.send('Error al registrar');
-            });
+		const { token, userId, email, name } = req.body;
+        const firebaseID = await admin.auth().verifyIdToken(token);
+		
+		const expiresIn = 60 * 60 * 1000; // 1 hora (en milisegundos);
+		const sessionCookie = await admin.auth().createSessionCookie(token, { expiresIn });
+
+		res.cookie('session', sessionCookie, {
+			maxAge: expiresIn,
+			httpOnly: true,
+			secure: false
+		})
+
+		res.send('Éxito registrando usuario');
+
 	} catch(error) {
 		console.log("[POST_REGISTRAR]", error)
+		res.sent(error.message);
 	}
 }

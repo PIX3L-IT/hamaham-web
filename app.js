@@ -1,19 +1,26 @@
-const express = require('express');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const { rest } = require('@feathersjs/express');
+const configuration = require('@feathersjs/configuration');
+const { cors, json, urlencoded, notFound, errorHandler } = require('@feathersjs/express');
+
 const path = require('path');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 const axios = require('axios');
 
-const app = express();
+const app = express(feathers());
 
-const connectDB = require('./config/mongoose');
+app.configure(configuration());
+
+const { logger } = require('./config/logger');
+const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
+const { logError } = require('./hooks/log-error');
+const { mongooseConfig } = require('./config/mongoose');
 const dotenv = require("dotenv").config()
 
 // Cargar variables de entorno
 require('dotenv').config();
-
-// Conectar a MongoDB
-connectDB();
-
-app.set('view engine', 'ejs');
 
 // Configurar el motor de vistas y archivos estáticos
 app.set('view engine', 'ejs');
@@ -21,19 +28,37 @@ app.set('views', [
   path.join(__dirname, 'usuarios', 'views'),
   path.join(__dirname, 'facturas', 'views')
 ]);
+
+// Middlewares básicos
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
+
+// Body-parser 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
+// Compresión
+app.use(compression());
 
-app.use(express.json());
+app.configure(mongooseConfig);
 
-app.use(express.urlencoded({ extended: true }));
+// Configurar Feathers REST
+app.configure(rest());
 
+const { userService } = require('./usuarios/control/services/user.service');
+app.configure(userService);
 
-app.get("/test", (req, res) => {
-    res.send("testing testing levi fanpage");
+// Hooks globales de Feathers 
+app.hooks({
+  around: {
+    all: [logError]
+  },
+  before: {},
+  after: {},
+  error: {}
 });
 
 // Rutas de la aplicación
@@ -49,6 +74,16 @@ app.get('/', (req, res) => {
   res.redirect('/pacientes/add-patient');
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+app.get('/js/firebase-config.js', (req, res) => {
+  res.type('application/javascript');
+  res.render('js/firebase-config', {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
+  });
+});
+
+module.exports = app;
