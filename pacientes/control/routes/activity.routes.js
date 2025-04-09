@@ -3,7 +3,7 @@ const router = express.Router();
 console.log('📦 Rutas de pacientes cargadas');
 const Patient = require('../../models/patient.model');
 
-router.get('/add-patient', (req, res) => {
+router.get('pacientes/add-patient', (req, res) => {
   res.send(`
     <h2>Agregar nuevo paciente</h2>
     <form method="POST" action="/add-patient">
