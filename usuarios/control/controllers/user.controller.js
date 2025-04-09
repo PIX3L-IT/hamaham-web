@@ -16,21 +16,16 @@ exports.getLogin = async (req, res, next) => {
 			messagingSenderId: process.env.MESSAGING_SENDER_ID,
 			appId: process.env.APP_ID,
 			error: '',
-			users,
 		})
 	} catch(error) {
 		console.log("[GET_LOGIN]", error)
+		res.send(error.message);
 	}
 }
 
 exports.getSignUp = async (req, res, next) => {
 	try {
-		const users = await req.app.service('/usuario').find({
-			headers: {
-				cookie: req.headers.cookie
-			}
-		})
-		res.render('signup', { users });
+		res.render('signup');
 	} catch(error) {
 		console.log("[GET_REGISTRAR]", error)
 	}
@@ -74,7 +69,10 @@ exports.postSignUp = async (req, res, next) => {
 			secure: false
 		})
 
+		res.send('Éxito registrando usuario');
+
 	} catch(error) {
 		console.log("[POST_REGISTRAR]", error)
+		res.sent(error.message);
 	}
 }

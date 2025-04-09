@@ -1,5 +1,6 @@
 const admin = require('../../../firebase');
 const { NotAuthenticated } = require('@feathersjs/errors');
+const cookie = require('cookie');
 
 async function firebaseHook(context) {
     const headers = context.params.headers || {};
@@ -53,4 +54,4 @@ async function firebaseHook(context) {
     throw new NotAuthenticated('Authentication failed');
 }
 
-module.exports = { firebaseHook }
+module.exports = firebaseHook

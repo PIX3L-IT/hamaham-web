@@ -13,6 +13,9 @@ const app = express(feathers());
 
 app.configure(configuration());
 
+const { logger } = require('./config/logger');
+const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
+const { logError } = require('./hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
 const dotenv = require("dotenv").config()
 
@@ -45,22 +48,17 @@ app.configure(mongooseConfig);
 // Configurar Feathers REST
 app.configure(rest());
 
-const { usuarioService } = require('./usuarios/control/services/user.service');
-app.configure(usuarioService);
+const { userService } = require('./usuarios/control/services/user.service');
+app.configure(userService);
 
 // Hooks globales de Feathers 
 app.hooks({
   around: {
-    all: {},
+    all: [logError]
   },
   before: {},
   after: {},
   error: {}
-});
-
-
-app.get("/test", (req, res) => {
-    res.send("testing testing levi fanpage");
 });
 
 // Rutas de la aplicación
