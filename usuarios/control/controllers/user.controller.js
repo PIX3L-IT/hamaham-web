@@ -3,7 +3,7 @@ const admin = require('../../../firebase');
 
 exports.getLogin = async (req, res, next) => {
 	try {
-		const users = await req.app.service('/usuario').find({
+		const users = await req.app.service('/api/usuario').find({
 			headers: {
 				cookie: req.headers.cookie
 			}

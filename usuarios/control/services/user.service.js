@@ -14,7 +14,7 @@ function usuarioService(app) {
   };
 
   // Montamos el servicio en /usuario
-  const service = app.use('/usuario', new UsuariosService(options));
+  const service = app.use('/api/usuario', new UsuariosService(options));
 
   service.hooks({
     before: {

@@ -1,7 +1,7 @@
 const admin = require('../../../firebase');
 const { NotAuthenticated } = require('@feathersjs/errors');
 
-module.exports = async function (context) {
+async function firebaseHook(context) {
     const headers = context.params.headers || {};
 
     // 1. Revisa si hay cookie
@@ -52,3 +52,5 @@ module.exports = async function (context) {
     // Si llegamos hasta aquí, algo salió mal (por ejemplo, cookie inválida y no hay ID token)
     throw new NotAuthenticated('Authentication failed');
 }
+
+module.exports = { firebaseHook }
