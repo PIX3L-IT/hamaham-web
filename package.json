@@ -19,6 +19,7 @@
     "@feathersjs/feathers": "^5.0.33",
     "@feathersjs/mongodb": "^5.0.33",
     "@feathersjs/schema": "^5.0.33",
+    "feathers-mongoose": "^8.5.1",
     "@feathersjs/transport-commons": "^5.0.33"
   }
 }
