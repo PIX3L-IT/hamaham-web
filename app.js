@@ -19,9 +19,6 @@ const dotenv = require("dotenv").config()
 // Cargar variables de entorno
 require('dotenv').config();
 
-
-app.set('view engine', 'ejs');
-
 // Configurar el motor de vistas y archivos estáticos
 app.set('view engine', 'ejs');
 app.set('views', [
@@ -43,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Compresión
 app.use(compression());
 
-// app.configure(mongooseConfig);
+app.configure(mongooseConfig);
 
 // Configurar Feathers REST
 app.configure(rest());
@@ -89,9 +86,5 @@ app.get('/js/firebase-config.js', (req, res) => {
     appId: process.env.APP_ID
   });
 });
-
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
 
 module.exports = app;

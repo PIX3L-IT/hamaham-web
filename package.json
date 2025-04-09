@@ -21,6 +21,7 @@
     "feathers-mongoose": "^8.5.1",
     "firebase-admin": "^13.2.0",
     "mongoose": "^8.13.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "winston": "^3.17.0"
   }
 }
