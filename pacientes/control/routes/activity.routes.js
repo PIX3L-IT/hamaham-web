@@ -6,7 +6,7 @@ const Patient = require('../../models/patient.model');
 router.get('/add-patient', (req, res) => {
   res.send(`
     <h2>Agregar nuevo paciente</h2>
-    <form method="POST" action="pacientes/add-patient">
+    <form method="POST" action="/pacientes/add-patient">
       <label>ID del paciente:</label><br>
       <input name="IdPatient" required /><br><br>
       <label>Nombre:</label><br>
