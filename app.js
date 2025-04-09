@@ -1,17 +1,24 @@
-const express = require('express');
+const feathers = require('@feathersjs/feathers');
+const express = require('@feathersjs/express');
+const { rest } = require('@feathersjs/express');
+const configuration = require('@feathersjs/configuration');
+const { cors, json, urlencoded, notFound, errorHandler } = require('@feathersjs/express');
+
 const path = require('path');
+const bodyParser = require('body-parser');
+const compression = require('compression');
 const axios = require('axios');
 
-const app = express();
+const app = express(feathers());
 
-const connectDB = require('./config/mongoose');
+app.configure(configuration());
+
+const { mongooseConfig } = require('./config/mongoose');
 const dotenv = require("dotenv").config()
 
 // Cargar variables de entorno
 require('dotenv').config();
 
-// Conectar a MongoDB
-connectDB();
 
 app.set('view engine', 'ejs');
 
@@ -21,15 +28,37 @@ app.set('views', [
   path.join(__dirname, 'usuarios', 'views'),
   path.join(__dirname, 'facturas', 'views')
 ]);
+
+// Middlewares básicos
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
+
+// Body-parser 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
+// Compresión
+app.use(compression());
 
-app.use(express.json());
+// app.configure(mongooseConfig);
 
-app.use(express.urlencoded({ extended: true }));
+// Configurar Feathers REST
+app.configure(rest());
+
+const { usuarioService } = require('./usuarios/control/services/user.service');
+
+// Hooks globales de Feathers 
+app.hooks({
+  around: {
+    all: {},
+  },
+  before: {},
+  after: {},
+  error: {}
+});
 
 
 app.get("/test", (req, res) => {
@@ -64,3 +93,5 @@ app.get('/js/firebase-config.js', (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+
+module.exports = app;

@@ -1,5 +1,5 @@
 const { Service } = require('feathers-mongoose');
-const UsuarioModel = require('../models/user.model');
+const UsuarioModel = require('../../models/user.model');
 const firebaseAuthHook = require('../hooks/firebase-auth');
 
 class UsuariosService extends Service {

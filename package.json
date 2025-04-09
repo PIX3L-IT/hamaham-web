@@ -1,15 +1,5 @@
 {
   "dependencies": {
-    "@firebase/app": "^0.11.4",
-    "@firebase/auth": "^1.10.0",
-    "axios": "^1.8.4",
-    "cookie": "^1.0.2",
-    "dotenv": "^16.4.7",
-    "ejs": "^3.1.10",
-    "express": "^5.1.0",
-    "firebase-admin": "^13.2.0",
-    "mongoose": "^8.13.2",
-    "path": "^0.12.7",
     "@feathersjs/adapter-commons": "^5.0.33",
     "@feathersjs/authentication": "^5.0.33",
     "@feathersjs/authentication-client": "^5.0.33",
@@ -19,7 +9,18 @@
     "@feathersjs/feathers": "^5.0.33",
     "@feathersjs/mongodb": "^5.0.33",
     "@feathersjs/schema": "^5.0.33",
+    "@feathersjs/transport-commons": "^5.0.33",
+    "@firebase/app": "^0.11.4",
+    "@firebase/auth": "^1.10.0",
+    "axios": "^1.8.4",
+    "body-parser": "^2.2.0",
+    "cookie": "^1.0.2",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
     "feathers-mongoose": "^8.5.1",
-    "@feathersjs/transport-commons": "^5.0.33"
+    "firebase-admin": "^13.2.0",
+    "mongoose": "^8.13.2",
+    "path": "^0.12.7"
   }
 }
