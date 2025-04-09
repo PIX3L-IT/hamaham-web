@@ -3,6 +3,11 @@ const admin = require('../../../firebase');
 
 exports.getLogin = async (req, res, next) => {
 	try {
+		const users = await req.app.service('/usuario').find({
+			headers: {
+				cookie: req.headers.cookie
+			}
+		})
 		res.render('login', {
 			apiKey: process.env.API_KEY,
 			authDomain: process.env.AUTH_DOMAIN,
@@ -11,6 +16,7 @@ exports.getLogin = async (req, res, next) => {
 			messagingSenderId: process.env.MESSAGING_SENDER_ID,
 			appId: process.env.APP_ID,
 			error: '',
+			users,
 		})
 	} catch(error) {
 		console.log("[GET_LOGIN]", error)
@@ -19,7 +25,12 @@ exports.getLogin = async (req, res, next) => {
 
 exports.getSignUp = async (req, res, next) => {
 	try {
-		res.render('signup')
+		const users = await req.app.service('/usuario').find({
+			headers: {
+				cookie: req.headers.cookie
+			}
+		})
+		res.render('signup', { users });
 	} catch(error) {
 		console.log("[GET_REGISTRAR]", error)
 	}

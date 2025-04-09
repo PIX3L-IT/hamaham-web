@@ -13,8 +13,8 @@ function usuarioService(app) {
     paginate: false
   };
 
-  // Montamos el servicio en /usuarios
-  const service = app.use('/usuarios', new UsuariosService(options));
+  // Montamos el servicio en /usuario
+  const service = app.use('/usuario', new UsuariosService(options));
 
   service.hooks({
     before: {

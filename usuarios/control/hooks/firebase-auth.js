@@ -1,5 +1,5 @@
 const admin = require('../../../firebase');
-const { NotAuthenticaded } = require('@feathersjs/errors');
+const { NotAuthenticated } = require('@feathersjs/errors');
 
 module.exports = async function (context) {
     const headers = context.params.headers || {};

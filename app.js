@@ -46,6 +46,7 @@ app.configure(mongooseConfig);
 app.configure(rest());
 
 const { usuarioService } = require('./usuarios/control/services/user.service');
+app.configure(usuarioService);
 
 // Hooks globales de Feathers 
 app.hooks({
