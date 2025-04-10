@@ -1,6 +1,18 @@
 const sanitize = require('mongo-sanitize');
 
-exports.get_patients = async (request, response, next) => {
+/*
+  Description:
+  Lists all registered patients from the database.
+
+  Parameters:
+  - request: Express Request Object
+  - response: Express Response Object
+  - next: Express Next Function
+
+  Returns:
+  - Renders 'patients-list' view with all patients or 500 error page
+*/
+exports.getPatients = async (request, response, next) => {
   try {
     const patients = await request.app.service('api/patients').find();
     response.render('patients-list', { patients });
@@ -10,20 +22,38 @@ exports.get_patients = async (request, response, next) => {
   }
 };
 
-exports.get_agregar_patient = async (request, response, next) => {
+/*
+  Description:
+  Renders the patient creation form.
+
+  Parameters:
+  - request: Express Request Object
+  - response: Express Response Object
+  - next: Express Next Function
+*/
+exports.getCreatePatient = async (request, response, next) => {
   response.render('patients-create');
 };
 
-exports.post_agregar_patient = async (request, response, next) => {
-  try {
-    const IdPatient = sanitize(request.body.IdPatient);
-    const Email = sanitize(request.body.Email);
-    const Name = sanitize(request.body.Name);
+/*
+  Description:
+  Creates a new patient after sanitizing input.
 
-    await request.app.service('api/patients').create({ 
-      IdPatient, 
-      Email, 
-      Name  
+  Parameters:
+  - request: Express Request Object
+  - response: Express Response Object
+  - next: Express Next Function
+*/
+exports.postCreatePatient = async (request, response, next) => {
+  try {
+    const idPatient = sanitize(request.body.IdPatient);
+    const email = sanitize(request.body.Email);
+    const name = sanitize(request.body.Name);
+
+    await request.app.service('api/patients').create({
+      IdPatient: idPatient,
+      Email: email,
+      Name: name
     });
 
     response.redirect('/patients');
@@ -33,7 +63,16 @@ exports.post_agregar_patient = async (request, response, next) => {
   }
 };
 
-exports.get_modificar_patient = async (request, response, next) => {
+/*
+  Description:
+  Retrieves a patient and renders the edit form.
+
+  Parameters:
+  - request: Express Request Object
+  - response: Express Response Object
+  - next: Express Next Function
+*/
+exports.getEditPatient = async (request, response, next) => {
   try {
     const id = sanitize(request.params.id);
     const patient = await request.app.service('api/patients').get(id);
@@ -44,17 +83,27 @@ exports.get_modificar_patient = async (request, response, next) => {
   }
 };
 
-exports.patch_modificar_patient = async (request, response, next) => {
+/*
+  Description:
+  Updates specific patient fields after sanitizing input.
+
+  Parameters:
+  - request: Express Request Object
+  - response: Express Response Object
+  - next: Express Next Function
+*/
+exports.patchEditPatient = async (request, response, next) => {
   try {
     const id = sanitize(request.params.id);
-    const IdPatient = sanitize(request.body.IdPatient);
-    const Email = sanitize(request.body.Email);
-    const Name = sanitize(request.body.Name);
+    const idPatient = sanitize(request.body.IdPatient);
+    const email = sanitize(request.body.Email);
+    const name = sanitize(request.body.Name);
 
-    await request.app.service('api/patients').patch(
-      id,
-      { IdPatient, Email, Name }
-    );
+    await request.app.service('api/patients').patch(id, {
+      IdPatient: idPatient,
+      Email: email,
+      Name: name
+    });
 
     response.redirect('/patients');
   } catch (error) {
@@ -63,7 +112,16 @@ exports.patch_modificar_patient = async (request, response, next) => {
   }
 };
 
-exports.delete_eliminar_patient = async (request, response, next) => {
+/*
+  Description:
+  Deletes a patient by ID after sanitization.
+
+  Parameters:
+  - request: Express Request Object
+  - response: Express Response Object
+  - next: Express Next Function
+*/
+exports.deletePatient = async (request, response, next) => {
   try {
     const id = sanitize(request.params.id);
     await request.app.service('api/patients').remove(id);
