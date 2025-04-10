@@ -11,20 +11,17 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const axios = require('axios');
 
+// Crea la app Feathers basada en Express
+const app = express(feathers());
+
+// Carga la configuración desde config/default.json
+app.configure(configuration());
+
 // Archivos locales
 const { logger } = require('./config/logger');
 const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
 const { logError } = require('./pacientes/control/hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
-
-// Crea la app Feathers basada en Express
-const app = express(feathers());
-
-// Carga la configuración desde config/default.json
-
-app.configure(configuration());
-
-const dotenv = require("dotenv").config()
 
 // Cargar variables de entorno
 require('dotenv').config();
@@ -32,8 +29,8 @@ require('dotenv').config();
 // Configura EJS
 app.set('view engine', 'ejs');
 app.set('views', [
-  path.join(__dirname, 'pacientes/views'),
-  path.join(__dirname, 'usuarios/views'),
+  path.join(__dirname, 'pacientes', 'views'),
+  path.join(__dirname, 'usuarios', 'views'),
   path.join(__dirname, 'facturas', 'views')
 ]);
 
@@ -46,7 +43,7 @@ app.use(urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Compresión
 app.use(compression());
@@ -76,7 +73,7 @@ app.hooks({
 
 const patientsSession = require('./pacientes/control/routes/patients.routes');
 app.use('/patients', patientsSession);
-const userSession = require('./usuarios/control/routes/users.routes');
+const userSession = require('./usuarios/control/routes/user.routes');
 app.use('/users', userSession);
 const clientsRoutes = require('./facturas/control/routes/clients.routes');
 app.use('/clientes', clientsRoutes);
@@ -88,11 +85,7 @@ app.get('/', (req, res) => {
   res.redirect('/pacientes/add-patient');
 });
 
-// Manejo de 404 y errores
-app.use(notFound());
-app.use(errorHandler({ logger }));
-
-app.get('/js/firebase-config.js', (req, res) => {
+app.get('/js/firebase-config.js', (req, res, next) => {
   res.type('application/javascript');
   res.render('js/firebase-config', {
     apiKey: process.env.API_KEY,
@@ -103,5 +96,10 @@ app.get('/js/firebase-config.js', (req, res) => {
     appId: process.env.APP_ID
   });
 });
+
+// Manejo de 404 y errores
+app.use(notFound());
+app.use(errorHandler({ logger }));
+
 
 module.exports = app;
