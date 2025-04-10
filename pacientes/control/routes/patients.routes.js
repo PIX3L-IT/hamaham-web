@@ -1,20 +1,25 @@
 const express = require('express');
-const patientsController = require('../controllers/patients.controller')
-
 const router = express.Router();
+const patientsController = require('../controllers/patients.controller');
 
-// Listar patients
-router.get('/', patientsController.get_patients);
+// Rutas para gestión de pacientes
 
-// Mostrar formulario para crear
-router.get('/create', patientsController.get_agregar_patient);
-router.post('/create', patientsController.post_agregar_patient);
+// Obtener listado de pacientes
+router.get('/', patientsController.getPatients);
 
-// Mostrar formulario para editar
-router.get('/edit/:id', patientsController.get_modificar_patient);
-router.patch('/edit/:id', patientsController.patch_modificar_patient);
+// Mostrar formulario de creación de paciente
+router.get('/create', patientsController.getCreatePatient);
 
-// Eliminar patient
-router.delete('/delete/:id', patientsController.delete_eliminar_patient);
+// Registrar nuevo paciente
+router.post('/create', patientsController.postCreatePatient);
+
+// Mostrar formulario de edición de paciente
+router.get('/edit/:id', patientsController.getEditPatient);
+
+// Actualizar datos de un paciente
+router.patch('/edit/:id', patientsController.patchEditPatient);
+
+// Eliminar paciente
+router.delete('/delete/:id', patientsController.deletePatient);
 
 module.exports = router;
