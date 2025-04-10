@@ -11,7 +11,9 @@
       <li>
         <strong><%= patient.Name %></strong> (<%= patient.Email %>)
         | <a href="/patients/edit/<%= patient._id %>">Editar</a>
-        | <a href="/patients/delete/<%= patient._id %>">Eliminar</a>
+        | <form action="/patients/delete/<%= patient._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit">Eliminar</button>
+          </form>
       </li>
     <% }) %>
   </ul>
