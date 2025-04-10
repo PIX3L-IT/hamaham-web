@@ -13,14 +13,16 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const axios = require('axios');
 
+const methodOverride = require('method-override');
+
 const app = express(feathers());
 
 app.use(helmet({
   contentSecurityPolicy: {
-      directives: {
-          "script-src": ["'self'", 'www.gstatic.com'],
-          "connect-src": ["'self'", 'securetoken.googleapis.com', 'identitytoolkit.googleapis.com']
-      },
+    directives: {
+      "script-src": ["'self'", 'www.gstatic.com'],
+      "connect-src": ["'self'", 'securetoken.googleapis.com', 'identitytoolkit.googleapis.com']
+    },
   },
 }));
 
@@ -56,6 +58,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Compresión
 app.use(compression());
+
+// Method Override
+app.use(methodOverride('_method'));
 
 // Conecta Mongoose
 app.configure(mongooseConfig);
