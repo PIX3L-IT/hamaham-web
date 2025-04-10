@@ -34,11 +34,7 @@
   "directories": {
     "test": "test"
   },
-<<<<<<< HEAD
   "main": "config/index.js",
-=======
-  "main": "index.js",
->>>>>>> fa67730e415da2876e382485686d85567ecb9749
   "dependencies": {
     "@feathersjs/adapter-commons": "^5.0.33",
     "@feathersjs/authentication": "^5.0.33",
