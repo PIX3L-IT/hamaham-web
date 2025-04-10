@@ -11,10 +11,10 @@ const compression = require('compression');
 const axios = require('axios');
 
 const app = express(feathers());
-app.disable('x-powered-by');
 
-app.disable('x-powered-by'); // Ya lo aplicaste correctamente
-app.use(helmet());   
+// Seguridad: Desactiva cabecera de Express y activa Helmet
+app.disable('x-powered-by');
+app.use(helmet());  
 
 app.configure(configuration());
 
