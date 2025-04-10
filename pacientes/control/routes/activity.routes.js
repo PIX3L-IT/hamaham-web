@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const Patient = require('../../models/patient.model');
 
+const { body, validationResult } = require('express-validator');
+const sanitize = require('mongo-sanitize');
+
 router.get('/add-patient', (req, res) => {
   res.send(`
     <h2>Agregar nuevo paciente</h2>
@@ -20,23 +23,38 @@ router.get('/add-patient', (req, res) => {
 });
 
 
-router.post('/add-patient', async (req, res) => {
-  try {
-    const { IdPatient, Name, Email, Phone } = req.body;
+router.post(
+  '/add-patient',
+  [
+    body('IdPatient').trim().escape().notEmpty(),
+    body('Name').trim().escape().notEmpty(),
+    body('Email').optional().isEmail().normalizeEmail(),
+    body('Phone').optional().isNumeric(),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send(`<h2>Datos inválidos</h2><pre>${JSON.stringify(errors.array(), null, 2)}</pre>`);
+    }
 
-    const newPatient = new Patient({
-      IdPatient,
-      Name,
-      Email,
-      Phone: Phone ? parseInt(Phone) : undefined
-    });
+    try {
+      const { IdPatient, Name, Email, Phone } = req.body;
 
-    await newPatient.save();
+      const newPatient = new Patient({
+        IdPatient: sanitize(IdPatient),
+        Name: sanitize(Name),
+        Email: sanitize(Email),
+        Phone: Phone ? parseInt(sanitize(Phone)) : undefined
+      });
 
-    res.send(`<h2>✅ Paciente agregado correctamente</h2><pre>${JSON.stringify(newPatient, null, 2)}</pre>`);
-  } catch (error) {
-    res.status(500).send(`<h2>❌ Error al agregar paciente</h2><pre>${error.message}</pre>`);
+      await newPatient.save();
+
+      res.send(`<h2>Paciente agregado correctamente</h2><pre>${JSON.stringify(newPatient, null, 2)}</pre>`);
+    } catch (error) {
+      res.status(500).send(`<h2>Error al agregar paciente</h2><pre>${error.message}</pre>`);
+    }
   }
-});
+);
+
 
 module.exports = router;
