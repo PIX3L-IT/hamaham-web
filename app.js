@@ -10,6 +10,7 @@ const compression = require('compression');
 const axios = require('axios');
 
 const app = express(feathers());
+app.disable('x-powered-by');
 
 app.configure(configuration());
 
