@@ -21,7 +21,7 @@ const Form = document.getElementById('clienteForm');
                 CfdiUse: formData.get("CfdiUse")
             }
 
-            fetch("/agregar-cliente", {
+            fetch("/clientes/agregar-cliente", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
