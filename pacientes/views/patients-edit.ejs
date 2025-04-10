@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Editar Usuario</h1>
-  <form action="/patients/edit/<%= patient._id %>" method="PATCH">
+  <form action="/patients/edit/<%= patient._id %>?_method=PATCH" method="POST">
     <p>IdPatient: <input type="text" name="IdPatient" value="<%= patient.IdPatient %>" /></p>
     <p>Email: <input type="email" name="Email" value="<%= patient.Email %>" required /></p>
     <p>Nombre: <input type="text" name="Name" value="<%= patient.Name %>" /></p>
