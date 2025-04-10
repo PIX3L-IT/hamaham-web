@@ -7,15 +7,22 @@ const { rest } = require('@feathersjs/express');
 const configuration = require('@feathersjs/configuration');
 const { cors, json, urlencoded, notFound, errorHandler } = require('@feathersjs/express');
 
+const helmet = require('helmet');
+
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const axios = require('axios');
 
 const app = express(feathers());
 
-// Seguridad: Desactiva cabecera de Express y activa Helmet
-app.disable('x-powered-by');
-app.use(helmet());  
+app.use(helmet({
+  contentSecurityPolicy: {
+      directives: {
+          "script-src": ["'self'", 'www.gstatic.com'],
+          "connect-src": ["'self'", 'securetoken.googleapis.com', 'identitytoolkit.googleapis.com']
+      },
+  },
+}));
 
 app.configure(configuration());
 

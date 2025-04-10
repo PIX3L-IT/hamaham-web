@@ -3,6 +3,7 @@ const { NotAuthenticated } = require('@feathersjs/errors');
 const cookie = require('cookie');
 
 async function firebaseAuthHook(context) {
+
     if (context.path == 'api/users'){
         
         const headers = context.params.headers || {};

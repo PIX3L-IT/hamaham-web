@@ -4,11 +4,6 @@ const { Types } = require('mongoose');
 
 exports.getLogin = async (req, res, next) => {
 	try {
-		const users = await req.app.service('/api/usuario').find({
-			headers: {
-				cookie: req.headers.cookie
-			}
-		})
 		res.render('login', {
 			apiKey: process.env.API_KEY,
 			authDomain: process.env.AUTH_DOMAIN,
@@ -34,6 +29,7 @@ exports.getSignUp = async (req, res, next) => {
 		res.render('signup');
 	} catch(error) {
 		console.log("[GET_REGISTRAR]", error.message)
+		res.send(error.message);
 	}
 }
 

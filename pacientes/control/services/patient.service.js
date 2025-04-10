@@ -1,6 +1,5 @@
 const { Service } = require('feathers-mongoose');
 const PatientModel = require('../../models/patients.model');
-const firebaseAuthHook = require('../../../usuarios/control/hooks/firebase-auth');
 
 
 class PatientsService extends Service {
@@ -18,15 +17,10 @@ function patientService(app) {
   // Montamos el servicio en /api/patients
   const service = app.use('/api/patients', new PatientsService(options));
   
-    // Aquí se añaden los hooks necesarios 
-    // service.hooks({
-    //   before: {
-    //     find: [firebaseAuthHook],
-    //     get: [firebaseAuthHook],
-    //     patch: [firebaseAuthHook],
-    //     remove: [firebaseAuthHook]
-    //   }
-    // });
+
+    service.hooks({
+      before: {}
+    });
   }
   
   module.exports = {
