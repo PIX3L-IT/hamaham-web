@@ -18,7 +18,7 @@ import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/fir
                     tokenField.value = token;
                     Form.submit();
                 } catch (error) {
-                    console.log(error);
+                    console.log(error.message);
                 }
 
         }

@@ -15,7 +15,7 @@ exports.getLogin = async (req, res, next) => {
 			error: '',
 		})
 	} catch(error) {
-		console.log("[GET_LOGIN]", error)
+		console.log("[GET_LOGIN]", error.message);
 		res.send(error.message);
 	}
 }
@@ -29,7 +29,7 @@ exports.getSignUp = async (req, res, next) => {
 		})
 		res.render('signup');
 	} catch(error) {
-		console.log("[GET_REGISTRAR]", error)
+		console.log("[GET_REGISTRAR]", error.message)
 	}
 }
 
@@ -50,7 +50,7 @@ exports.postLogin = async (req, res, next) => {
 
 		res.send('Éxito al iniciar sesión');
 	} catch(error) {
-		console.log("[POST_LOGIN]", error)
+		console.log("[POST_LOGIN]", error.message)
 		res.render('login', {
 			error: 'Error al iniciar sesión'
 		})
@@ -74,7 +74,7 @@ exports.postSignUp = async (req, res, next) => {
 		res.send('Éxito registrando usuario');
 
 	} catch(error) {
-		console.log("[POST_REGISTRAR]", error)
+		console.log("[POST_REGISTRAR]", error.message)
 		res.sent(error.message);
 	}
 }
@@ -83,11 +83,9 @@ exports.getPermissions = async (request, response, next) => {
     try {
         // Llama al servicio Feathers para obtener todos los users
         const permissions = await request.app.service('api/permissions').find();
-        // Renderiza la vista EJS
-        console.log("Permisos:", permissions)
         response.status(200).json({ message: "Permisos: ", permissions: permissions });
   } catch (error) {
-        console.error(error);
+        console.error(error.message);
         response.status(500).render('500'); // Tu vista de error
   }
 };
@@ -140,7 +138,7 @@ exports.postEditPermissions = async (request, response, next) => {
       });
       
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
       response.status(500).render("500");
     }
   };

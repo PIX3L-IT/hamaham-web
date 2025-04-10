@@ -92,8 +92,6 @@
                 TaxZipCode: formData.get("ZipCode")
             }
 
-            console.log(JSON.stringify(data, null, 2));
-
             fetch(`/clientes/editar-cliente/${clientId}`, {
                 method: "PUT",
                 headers: {

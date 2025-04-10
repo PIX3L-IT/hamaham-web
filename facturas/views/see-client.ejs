@@ -17,9 +17,7 @@
     fetch('/clientes/get-clients')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         for (let user of data.data) {
-            console.log(user.Name);
             lista.innerHTML += `
                 <li>
                 ${user.Name} <a href="/clientes/editar-cliente/${user.Id}">Editar</a> <a href="/clientes/consultar-cliente/${user.Id}">Consultar</a>

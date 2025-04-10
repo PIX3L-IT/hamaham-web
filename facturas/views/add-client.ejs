@@ -71,8 +71,6 @@
                 CfdiUse: formData.get("CfdiUse")
             }
 
-            console.log(JSON.stringify(data, null, 2));
-
             fetch("/agregar-cliente", {
                 method: "POST",
                 headers: {
