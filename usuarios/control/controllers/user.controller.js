@@ -95,18 +95,20 @@ exports.postEditPermissions = async (request, response, next) => {
     try {
       const firebaseUID = request.params.firebaseUID;
       const result = await request.app.service('api/users').find({
+		headers: {
+			cookie: request.headers.cookie
+		},
         query: {
           firebaseUID: firebaseUID,
           $limit: 1
         }
       });
       id = result[0]._id
-      
       //const { adminUsers, bills, patients, statistics } = request.body;
       const adminUsers = true;
-      const bills = true;
+      const bills = false;
       const patients = false;
-      const statistics = true;
+      const statistics = false;
     
       const permissions = [];
   
@@ -126,7 +128,9 @@ exports.postEditPermissions = async (request, response, next) => {
       // Actualiza el usuario
       await request.app.service("api/users").patch(id, {
         permissions,
-      });
+      }, {headers: {
+		cookie: request.headers.cookie
+	  }});
 
       // Envía respuesta al cliente
 
