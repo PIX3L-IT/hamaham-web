@@ -1,5 +1,5 @@
 const admin = require('../../../config/firebase');
-const { Types } = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 
 exports.getLogin = async (req, res, next) => {
@@ -93,6 +93,12 @@ exports.getPermissions = async (request, response, next) => {
 
 exports.postEditPermissions = async (request, response, next) => {
     try {
+		const PERMISSION_IDS = {
+			adminUsers: new ObjectId("67f468d759e0643dcf3ecb6c"),
+			bills: new ObjectId("67f469e559e0643dcf3ecb6d"),
+			patients: new ObjectId("67f469f459e0643dcf3ecb6e"),
+			statistics: new ObjectId("67f46a0559e0643dcf3ecb6f"),
+		  };
       const firebaseUID = request.params.firebaseUID;
       const result = await request.app.service('api/users').find({
 		headers: {
@@ -103,35 +109,14 @@ exports.postEditPermissions = async (request, response, next) => {
           $limit: 1
         }
       });
-      id = result[0]._id
-      //const { adminUsers, bills, patients, statistics } = request.body;
-      const adminUsers = true;
-      const bills = false;
-      const patients = false;
-      const statistics = false;
-    
-      const permissions = [];
-  
-      if (adminUsers === true) {
-        permissions.push(new Types.ObjectId("67f468d759e0643dcf3ecb6c"));
-      }
-      if (bills === true) {
-        permissions.push(new Types.ObjectId("67f468d759e0643dcf3ecb6c"));
-      }
-      if (patients === true) {
-        permissions.push(new Types.ObjectId("67f468d759e0643dcf3ecb6c"));
-      }
-      if (statistics === true) {
-        permissions.push(new Types.ObjectId("67f468d759e0643dcf3ecb6c"));
-      }
-  
-      // Actualiza el usuario
-      await request.app.service("api/users").patch(id, {
-        permissions,
-      }, {headers: {
-		cookie: request.headers.cookie
-	  }});
-
+	  if (result.length === 0) {
+		return response.status(404).send('Usuario no encontrado');
+	  }
+      //id = result[0]._id
+	  const adminUsers = result[0].permissions.some(p => p.equals(PERMISSION_IDS.adminUsers));
+	  const bills = result[0].permissions.some(p => p.equals(PERMISSION_IDS.bills));
+	  const patients = result[0].permissions.some(p => p.equals(PERMISSION_IDS.patients));
+	  const statistics = result[0].permissions.some(p => p.equals(PERMISSION_IDS.statistics));
       // Envía respuesta al cliente
 
       response.render('../views/permissions', {
