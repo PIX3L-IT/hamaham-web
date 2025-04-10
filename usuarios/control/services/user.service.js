@@ -1,33 +1,32 @@
 const { Service } = require('feathers-mongoose');
-const userModel = require('../../models/user.model');
+const UserModel = require('../../models/users.model');
 const firebaseAuthHook = require('../hooks/firebase-auth');
 
 class UsersService extends Service {
-  // Aquí puedes sobrescribir métodos (find, get, create, etc.)
-  // o añadir métodos personalizados.
+    // Aquí puedes sobrescribir métodos (find, get, create, etc.)
+    // o añadir métodos personalizados.
 }
 
 function userService(app) {
-  const options = {
-    Model: userModel,
-    paginate: false
+    const options = {
+      Model: UserModel,
+      paginate: false
+    };
+  
+    // Montamos el servicio en /api/users
+    const service = app.use('/api/users', new UsersService(options));
+  
+    // Aquí se añaden los hooks necesarios 
+    service.hooks({
+      before: {
+        find: [firebaseAuthHook],
+        get: [firebaseAuthHook],
+        patch: [firebaseAuthHook],
+        remove: [firebaseAuthHook]
+      }
+    });
+  }
+  
+  module.exports = {
+    userService
   };
-
-  // Montamos el servicio en /usuario
-  app.use('/api/usuario', new UsersService(options));
-
-  const service = app.service('/api/usuario');
-
-  service.hooks({
-    before: {
-      find: [firebaseAuthHook],
-      get: [firebaseAuthHook],
-      patch: [firebaseAuthHook],
-      remove: [firebaseAuthHook]
-    }
-  });
-}
-
-module.exports = {
-  userService
-};

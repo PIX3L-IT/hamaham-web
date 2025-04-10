@@ -1,26 +1,34 @@
+const path = require('path');
+process.env.NODE_CONFIG_DIR = path.join(__dirname, 'config', 'environments');
+process.env.NODE_ENV = 'stage';
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const { rest } = require('@feathersjs/express');
-const helmet = require('helmet'); 
 const configuration = require('@feathersjs/configuration');
 const { cors, json, urlencoded, notFound, errorHandler } = require('@feathersjs/express');
 
-const path = require('path');
+const helmet = require('helmet');
+
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const axios = require('axios');
 
 const app = express(feathers());
 
-// Seguridad: Desactiva cabecera de Express y activa Helmet
-app.disable('x-powered-by');
-app.use(helmet());  
+app.use(helmet({
+  contentSecurityPolicy: {
+      directives: {
+          "script-src": ["'self'", 'www.gstatic.com'],
+          "connect-src": ["'self'", 'securetoken.googleapis.com', 'identitytoolkit.googleapis.com']
+      },
+  },
+}));
 
 app.configure(configuration());
 
 const { logger } = require('./config/logger');
 const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
-const { logError } = require('./hooks/log-error');
+const { logError } = require('./pacientes/control/hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
 const dotenv = require("dotenv").config()
 
@@ -31,6 +39,7 @@ require('dotenv').config();
 app.set('view engine', 'ejs');
 app.set('views', [
   path.join(__dirname, 'usuarios', 'views'),
+  path.join(__dirname, 'pacientes', 'views'),
   path.join(__dirname, 'facturas', 'views')
 ]);
 
@@ -48,13 +57,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Compresión
 app.use(compression());
 
+// Conecta Mongoose
 app.configure(mongooseConfig);
 
-// Configurar Feathers REST
+// Configura Feathers REST (crea endpoints /serviceName)
 app.configure(rest());
 
+const { patientService } = require('./pacientes/control/services/patient.service');
+app.configure(patientService);
 const { userService } = require('./usuarios/control/services/user.service');
 app.configure(userService);
+const { permissionService } = require('./usuarios/control/services/permission.service');
+app.configure(permissionService);
 
 // Hooks globales de Feathers 
 app.hooks({
@@ -66,20 +80,21 @@ app.hooks({
   error: {}
 });
 
-// Rutas de la aplicación
+const patientsSession = require('./pacientes/control/routes/patients.routes');
+app.use('/patients', patientsSession);
+const userSession = require('./usuarios/control/routes/user.routes');
+app.use('/users', userSession);
 const clientsRoutes = require('./facturas/control/routes/clients.routes');
+app.use('/clientes', clientsRoutes);
 const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
-
-app.use("/usuario", require("./usuarios/control/routes/user.routes")); // Ahora montado en /usuario
-app.use('/clientes', clientsRoutes);         // Ahora montado en /facturama
-app.use('/pacientes', pacientesRoutes);      // Ahora montado en /pacientes
+app.use('/pacientes', pacientesRoutes); 
 
 // Redirección opcional si alguien entra a /
 app.get('/', (req, res) => {
   res.redirect('/pacientes/add-patient');
 });
 
-app.get('/js/firebase-config.js', (req, res) => {
+app.get('/js/firebase-config.js', (req, res, next) => {
   res.type('application/javascript');
   res.render('js/firebase-config', {
     apiKey: process.env.API_KEY,
@@ -90,5 +105,10 @@ app.get('/js/firebase-config.js', (req, res) => {
     appId: process.env.APP_ID
   });
 });
+
+// Manejo de 404 y errores
+app.use(notFound());
+app.use(errorHandler({ logger }));
+
 
 module.exports = app;

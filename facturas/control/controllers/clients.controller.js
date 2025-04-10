@@ -38,7 +38,7 @@ exports.postAddClient = async (req, res, next) => {
             facturamaResponse: response.data
         });
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('[POST ADD CLIENT]:', error.message);
         console.error('Response Data:', error.response?.data);
         res.status(500).json({ error: 'Failed to POST' });
     }
@@ -58,7 +58,7 @@ exports.getClientList = async (req, res, next) => {
         })
         res.json(response.data);
     } catch (error) {
-        console.log(error.message);
+        console.log('[GET CLIENT LIST]', error.message);
         console.log('Response Data:', error.response?.data);
     }
 }
@@ -76,7 +76,7 @@ exports.getSeeClients = async (req, res, next) => {
         })
         res.render('see-client');
     } catch (error) {
-        console.log(error.message);
+        console.log('[GET SEE CLIENTS]', error.message);
         console.log('Response Data:', error.response?.data);
     }
 }
@@ -142,7 +142,7 @@ exports.putEditClient = async (req, res, next) => {
             facturamaResponse: response.data
         });
     } catch (error) {
-        console.error('Error:', error.message);
+        console.error('[PUT EDIT CLIENT]:', error.message);
         console.error('Response Data:', error.response?.data);
         res.status(500).json({ error: 'Failed to PUT' });
     }

@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-function mongooseConfig (app) {
-    // Obtén la cadena de conexión desde la config de Feathers
-  const connectionString = 'mongodb://localhost:27018/develop'; 
+function mongooseConfig(app) {
+  // Obtén la cadena de conexión desde la config de Feathers
+  const connectionString = app.get('mongodb'); 
 
   // Conecta Mongoose
   mongoose.connect(connectionString)
@@ -10,7 +10,7 @@ function mongooseConfig (app) {
       console.log('Conexión establecida con MongoDB via Mongoose');
     })
     .catch(err => {
-      console.error('Error al conectar con MongoDB', err);
+      console.error('Error al conectar con MongoDB', err.message);
     });
 
   // Si quieres acceder a la instancia en otras partes vía app:

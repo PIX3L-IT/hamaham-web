@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tokenField.value = token;
             Form.submit();
         } catch (error){
-            console.log(error);
+            console.log(error.message);
         }
     }
     Form.addEventListener('submit', createUser);
