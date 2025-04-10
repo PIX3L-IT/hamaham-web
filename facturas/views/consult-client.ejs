@@ -93,8 +93,6 @@
                 TaxZipCode: formData.get("ZipCode")
             }
 
-            console.log(JSON.stringify(data, null, 2));
-
             fetch(`/clientes/eliminar-cliente/${clientId}`, {
                 method: "DELETE",
                 headers: {

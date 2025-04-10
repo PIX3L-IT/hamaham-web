@@ -19,7 +19,6 @@ app.configure(configuration());
 
 // Archivos locales
 const { logger } = require('./config/logger');
-const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
 const { logError } = require('./pacientes/control/hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
 
