@@ -1,6 +1,7 @@
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const { rest } = require('@feathersjs/express');
+const helmet = require('helmet'); 
 const configuration = require('@feathersjs/configuration');
 const { cors, json, urlencoded, notFound, errorHandler } = require('@feathersjs/express');
 
@@ -11,6 +12,9 @@ const axios = require('axios');
 
 const app = express(feathers());
 app.disable('x-powered-by');
+
+app.disable('x-powered-by'); // Ya lo aplicaste correctamente
+app.use(helmet());   
 
 app.configure(configuration());
 
