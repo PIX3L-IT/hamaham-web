@@ -55,7 +55,6 @@ async function firebaseAuthHook(context) {
         // Si llegamos hasta aquí, algo salió mal (por ejemplo, cookie inválida y no hay ID token)
         throw new NotAuthenticated('Authentication failed');
     } else {
-        console.log("context path:", context.path);
         return context;
     }
 }
