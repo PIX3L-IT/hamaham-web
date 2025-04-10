@@ -42,7 +42,7 @@ exports.get_modificar_patient = async (request, response, next) => {
   }
 };
 
-exports.post_modificar_patient = async (request, response, next) => {
+exports.patch_modificar_patient = async (request, response, next) => {
     try {
         const id = request.params.id;
         const { IdPatient, Email, Name } = request.body;
@@ -58,7 +58,7 @@ exports.post_modificar_patient = async (request, response, next) => {
   }
 };
 
-exports.get_eliminar_patient = async (request, response, next) => {
+exports.delete_eliminar_patient = async (request, response, next) => {
     try {
         const id = request.params.id;
         await request.app.service('api/patients').remove(id);
