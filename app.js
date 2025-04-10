@@ -11,25 +11,28 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const axios = require('axios');
 
-// Crea la app Feathers basada en Express
 const app = express(feathers());
 
-// Carga la configuración desde config/default.json
+// Seguridad: Desactiva cabecera de Express y activa Helmet
+app.disable('x-powered-by');
+app.use(helmet());  
+
 app.configure(configuration());
 
-// Archivos locales
 const { logger } = require('./config/logger');
+const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
 const { logError } = require('./pacientes/control/hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
+const dotenv = require("dotenv").config()
 
 // Cargar variables de entorno
 require('dotenv').config();
 
-// Configura EJS
+// Configurar el motor de vistas y archivos estáticos
 app.set('view engine', 'ejs');
 app.set('views', [
-  path.join(__dirname, 'pacientes', 'views'),
   path.join(__dirname, 'usuarios', 'views'),
+  path.join(__dirname, 'pacientes', 'views'),
   path.join(__dirname, 'facturas', 'views')
 ]);
 
