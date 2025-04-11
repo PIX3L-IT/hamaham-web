@@ -1,5 +1,13 @@
 const sanitize = require('mongo-sanitize');
 
+exports.getDownloadPatients = async (req, res, next) => {
+      try {
+            res.render('patients-download');
+      } catch(error){
+            console.error(error.message);
+      }
+}
+
 /*
   Description:
   Lists all registered patients from the database.

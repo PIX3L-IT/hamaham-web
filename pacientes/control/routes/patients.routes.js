@@ -22,4 +22,6 @@ router.patch('/edit/:id', patientsController.patchEditPatient);
 // Eliminar paciente
 router.delete('/delete/:id', patientsController.deletePatient);
 
+// Descargar pacientes
+router.get('/download', patientsController.getDownloadPatients);
 module.exports = router;
