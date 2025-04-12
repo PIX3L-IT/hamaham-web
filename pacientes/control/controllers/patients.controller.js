@@ -22,8 +22,6 @@ exports.getDownloadPDF = async (req, res, next) => {
 
             doc.fontSize(18).text('Lista de Pacientes', {align: 'center'}).moveDown();
 
-            console.log(patients);
-
             patients.forEach((patient, i) => {
                   doc.fontSize(12).text(`[${patient.IdPatient}] ${patient.Name} - ${patient.Email}`)
             });
