@@ -42,7 +42,8 @@ app.set('view engine', 'ejs');
 app.set('views', [
   path.join(__dirname, 'usuarios', 'views'),
   path.join(__dirname, 'pacientes', 'views'),
-  path.join(__dirname, 'facturas', 'views')
+  path.join(__dirname, 'facturas', 'views'),
+  path.join(__dirname, 'clinica', 'views')
 ]);
 
 // Middlewares básicos
@@ -93,6 +94,10 @@ const clientsRoutes = require('./facturas/control/routes/clients.routes');
 app.use('/clientes', clientsRoutes);
 const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
 app.use('/pacientes', pacientesRoutes); 
+
+const clinicaRoutes = require('./clinica/control/routes/clinica.routes');
+app.use('/clinica', clinicaRoutes);
+
 
 // Redirección opcional si alguien entra a /
 app.get('/', (req, res) => {
