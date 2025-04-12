@@ -1,38 +1,4 @@
 const sanitize = require('mongo-sanitize');
-const PDFDocument = require('pdfkit');
-
-exports.getDownloadPatients = async (req, res, next) => {
-      try {
-            res.render('patients-download');
-      } catch(error){
-            console.error(error.message);
-      }
-}
-
-exports.getDownloadPDF = async (req, res, next) => {
-      try {
-            const patientsService = req.app.service('api/patients');
-            const patients = await patientsService.find()
-
-            const doc = new PDFDocument();
-            res.setHeader('Content-Disposition', 'attachment; filename=patients.pdf')
-            res.setHeader('Content-Type', 'application/pdf');
-
-            doc.pipe(res);
-
-            doc.fontSize(18).text('Lista de Pacientes', {align: 'center'}).moveDown();
-
-            patients.forEach((patient, i) => {
-                  doc.fontSize(12).text(`[${patient.IdPatient}] ${patient.Name} - ${patient.Email}`)
-            });
-
-            doc.end();
-
-
-      } catch(error){
-            console.error(error.message);
-      }
-}
 
 /*
   Description:
