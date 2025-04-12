@@ -12,6 +12,7 @@ const sanitize = require('mongo-sanitize');
   Returns:
   - Renders 'patients-list' view with all patients or 500 error page
 */
+
 exports.getPatients = async (request, response, next) => {
   try {
     const patients = await request.app.service('api/patients').find();
@@ -31,6 +32,7 @@ exports.getPatients = async (request, response, next) => {
   - response: Express Response Object
   - next: Express Next Function
 */
+
 exports.getCreatePatient = async (request, response, next) => {
   response.render('patients-create');
 };
