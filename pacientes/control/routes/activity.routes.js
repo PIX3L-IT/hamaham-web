@@ -10,20 +10,7 @@ const sanitize = require('mongo-sanitize');
   Renderiza un formulario HTML simple para registrar un nuevo paciente.
 */
 router.get('/add-patient', (request, response) => {
-  response.send(`
-    <h2>Agregar nuevo paciente</h2>
-    <form method="POST" action="/pacientes/add-patient">
-      <label>ID del paciente:</label><br>
-      <input name="IdPatient" required /><br><br>
-      <label>Nombre:</label><br>
-      <input name="Name" required /><br><br>
-      <label>Email:</label><br>
-      <input name="Email" /><br><br>
-      <label>Teléfono:</label><br>
-      <input name="Phone" type="number" /><br><br>
-      <button type="submit">Guardar</button>
-    </form>
-  `);
+  response.render('patients-create')
 });
 
 /*
