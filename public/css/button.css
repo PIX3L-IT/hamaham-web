@@ -9,7 +9,7 @@
   width: 305px;
   height: 41px;
   border-radius: 10px;
-  border: none;
+  margin: 10px;
   flex-shrink: 0;
 
   /* --- colores --- */

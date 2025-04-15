@@ -4,6 +4,7 @@
 .search-bar {
     width: 1000px;
     height: 41px;
+    margin: 10px;
     display: flex;
     border-radius: 10px;
     overflow: hidden;                    /* redondea también el botón */

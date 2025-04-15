@@ -1,20 +1,5 @@
-
-<!-- 1 · Qué hace la barra
-Genera un formulario HTML con un <input> y un botón.
-
-Cuando el usuario escribe “Mar” y pulsa Enter o el botón, el navegador navega a la URL que indiques en el parámetro action, 
-añadiendo un query‑string, por ejemplo:
-/patients?name=Mar
-
-Ejemplo de uso en una vista:
-<%- include('searchbar.component.ejs', {
-      action: '/patients',     // a qué ruta enviar
-      queryName: 'name',       // ?name=Mar
-      placeholder: 'Buscar paciente…'
-}) %>
-
- -->
-
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/searchbar.css">
 
 <% /*
   Componente: Barra de búsqueda

@@ -1,0 +1,49 @@
+ <!-- Aquí se deben incluir todos los componentes cuando estén listos -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visualización de componentes</title>
+
+</head>
+
+<%- include('title.component.ejs', {
+    text: 'Componente title'
+}) %>
+
+<%- include('subtitle.component.ejs', {
+    text: 'Componente subtitle'
+}) %>
+
+<%- include('subsubtitle.component.ejs', {
+    text: 'Componente subsubtitle'
+}) %>
+
+<%- include('text.component.ejs', {
+    text: 'Componente text en negritas',
+    bold: 'bold'
+}) %>
+
+<%- include('text.component.ejs', {
+    text: 'Componente text normal',
+    bold: ''
+}) %>
+
+<%- include('searchbar.component.ejs') %>
+
+<%- include('button.component.ejs', {       
+        id: 'btnListaPacientes',
+        text: '📋 Ver lista de pacientes',
+        href: '/patients'
+}) %>
+
+<%- include('button.component.ejs', {
+        id: 'btnNuevoPaciente',
+        text: '➕ Crear nuevo paciente',
+        href: '/patients/create'
+}) %>
+
+
+</body>
+</html>
