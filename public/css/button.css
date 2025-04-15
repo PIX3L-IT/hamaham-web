@@ -1,0 +1,40 @@
+/*  Botón reutilizable
+    ¿Por qué? Centraliza estilos comunes y elimina duplicación.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+.custom-btn {
+  /* --- tamaño y forma --- */
+  width: 305px;
+  height: 41px;
+  border-radius: 10px;
+  border: none;
+  flex-shrink: 0;
+
+  /* --- colores --- */
+  background: #fe829f;
+  color: #ffffff;
+
+  /* --- tipografía --- */
+  font-family: "Poppins", sans-serif;
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
+  line-height: 1; /* 100 % */
+
+  /* --- alineación de contenido --- */
+  display: flex;            /* centra horizontal y verticalmente */
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;             /* espacio si pones iconos con texto */
+
+  /* --- efectos --- */
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  cursor: pointer;
+  text-decoration: none;    /* elimina subrayado cuando es <a> */
+}
+
+/* opcional: efecto hover */
+.custom-btn:hover {
+  opacity: 0.9;
+}

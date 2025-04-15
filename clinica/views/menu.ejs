@@ -3,25 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <title>Menú Principal - Clínica</title>
-  <link rel="stylesheet" href="/css/boostrap.css" />
+
+  <!-- Bootstrap CSS local -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/button.css">
 </head>
 <body class="p-4">
   <h1>🏥 Menú Principal</h1>
 
-  <ul class="list-group mt-4">
-    <li class="list-group-item">
-        <a href="/users/login">➕ Login</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/patients">📋 Ver lista de pacientes</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/patients/create">➕ Crear nuevo paciente</a>
-    </li>
-    <li class="list-group-item">
-      <a href="/clientes/">👤 Ver lista de clientes registrados en facturama</a>
-    </li>
-    
+  <!-- Menú Dropdown con Bootstrap -->
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+    Menú Principal
+  </button>
+  
+  <ul class="dropdown-menu" aria-labelledby="menuDropdown">
+    <li><a class="dropdown-item" href="/users/login">➕ Login</a></li>
+    <li><a class="dropdown-item" href="/patients">📋 Ver lista de pacientes</a></li>
+    <li><a class="dropdown-item" href="/patients/create">➕ Crear nuevo paciente</a></li>
+    <li><a class="dropdown-item" href="/clientes/">👤 Ver clientes en Facturama</a></li>
   </ul>
+</div>
+
+<div class="mt-4 d-flex flex-column gap-2">
+  <%- include('button.component.ejs', {        <!-- sin “/” -->
+        id: 'btnListaPacientes',
+        text: '📋 Ver lista de pacientes',
+        href: '/patients'
+  }) %>
+
+  <%- include('button.component.ejs', {
+        id: 'btnNuevoPaciente',
+        text: '➕ Crear nuevo paciente',
+        href: '/patients/create'
+  }) %>
+</div>
+
+
+  <!-- Bootstrap JS local (incluye Popper también) -->
+  <script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
