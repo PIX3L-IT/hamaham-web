@@ -11,7 +11,7 @@
   "license": "MIT",
   "author": "Pixel.IT",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./config/index.js",
     "dev": "nodemon index.js",
     "prettier": "npx prettier \"**/*.js\" --write",
     "mocha": "cross-env NODE_ENV=test mocha test/ --recursive --exit",
