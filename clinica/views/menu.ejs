@@ -7,6 +7,8 @@
   <!-- Bootstrap CSS local -->
   <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/button.css">
+  <link rel="stylesheet" href="/css/searchbar.css">
+
 </head>
 <body class="p-4">
   <h1>🏥 Menú Principal</h1>
@@ -23,6 +25,10 @@
     <li><a class="dropdown-item" href="/patients/create">➕ Crear nuevo paciente</a></li>
     <li><a class="dropdown-item" href="/clientes/">👤 Ver clientes en Facturama</a></li>
   </ul>
+</div>
+
+<div class="mt-4">
+  <%- include('searchbar.component.ejs') %>
 </div>
 
 <div class="mt-4 d-flex flex-column gap-2">
