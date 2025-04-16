@@ -80,24 +80,67 @@ exports.getCreatePatient = async (request, response, next) => {
   - response: Express Response Object
   - next: Express Next Function
 */
-exports.postCreatePatient = async (request, response, next) => {
+exports.postCreatePatient = async (req, res, next) => {
   try {
-    const idPatient = sanitize(request.body.IdPatient);
-    const email = sanitize(request.body.Email);
-    const name = sanitize(request.body.Name);
+    const sanitizedBody = {
+      Name: sanitize(req.body.Name),
+      Email: sanitize(req.body.Email),
+      Phone: sanitize(req.body.Phone),
+      Religion: sanitize(req.body.Religion),
+      Marital_Status: sanitize(req.body.Marital_Status),
+      Occupation: sanitize(req.body.Occupation),
+      Education: sanitize(req.body.Education),
+      Emergency_Contact: sanitize(req.body.Emergency_Contact),
+      Weight: sanitize(req.body.Weight),
+      Height: sanitize(req.body.Height),
+      Date_of_Birth: sanitize(req.body.Date_of_Birth),
+      Reason_for_Consultation: sanitize(req.body.Reason_for_Consultation),
 
-    await request.app.service('api/patients').create({
-      IdPatient: idPatient,
-      Email: email,
-      Name: name
-    });
+      Pathological_Antecedents: {
+        Systematic_Diseases: sanitize(req.body.Pathological_Antecedents?.Systematic_Diseases),
+        Surgical_Antecedents: sanitize(req.body.Pathological_Antecedents?.Surgical_Antecedents),
+        Hospitalizations: sanitize(req.body.Pathological_Antecedents?.Hospitalizations),
+        Pregnancies: sanitize(req.body.Pathological_Antecedents?.Pregnancies),
+        Musculoskeletal_Problems: sanitize(req.body.Pathological_Antecedents?.Musculoskeletal_Problems),
+        Transfusions: sanitize(req.body.Pathological_Antecedents?.Transfusions),
+        Allergies: sanitize(req.body.Pathological_Antecedents?.Allergies),
+      },
 
-    response.redirect('/patients');
+      Non_Pathological_Antecedents: {
+        Alcohol: sanitize(req.body.Non_Pathological_Antecedents?.Alcohol),
+        Other_Substances: sanitize(req.body.Non_Pathological_Antecedents?.Other_Substances),
+        Food: sanitize(req.body.Non_Pathological_Antecedents?.Food),
+        Hidration: sanitize(req.body.Non_Pathological_Antecedents?.Hidration),
+        Physical_Activity: sanitize(req.body.Non_Pathological_Antecedents?.Physical_Activity),
+        Laboral_Activity: sanitize(req.body.Non_Pathological_Antecedents?.Laboral_Activity),
+        Sleep: sanitize(req.body.Non_Pathological_Antecedents?.Sleep),
+        Stress: sanitize(req.body.Non_Pathological_Antecedents?.Stress),
+      },
+
+      Family_History: {
+        Arterial_Hypertension: sanitize(req.body.Family_History?.Arterial_Hypertension),
+        Diabetes: sanitize(req.body.Family_History?.Diabetes),
+        Cancer: sanitize(req.body.Family_History?.Cancer),
+        Acute_Myocardial_Infarction: sanitize(req.body.Family_History?.Acute_Myocardial_Infarction),
+        Cerebrovascular_Accident: sanitize(req.body.Family_History?.Cerebrovascular_Accident),
+        Viral_Respiratory_Infections: sanitize(req.body.Family_History?.Viral_Respiratory_Infections),
+        Thyroid_Disease: sanitize(req.body.Family_History?.Thyroid_Disease),
+        Rheumatoid_Arthritis_Lupus: sanitize(req.body.Family_History?.Rheumatoid_Arthritis_Lupus),
+        Neuromuscular_Disorders: sanitize(req.body.Family_History?.Neuromuscular_Disorders),
+        Down_Syndrome: sanitize(req.body.Family_History?.Down_Syndrome),
+        Mental_Disorders: sanitize(req.body.Family_History?.Mental_Disorders),
+        Other: sanitize(req.body.Family_History?.Other),
+      }
+    };
+
+    await req.app.service('api/patients').create(sanitizedBody);
+    res.redirect('/patients');
   } catch (error) {
     console.error(error.message);
-    response.status(500).render('500');
+    res.status(500).render('500');
   }
 };
+
 
 /*
   Description:
