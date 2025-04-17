@@ -1,5 +1,5 @@
-const sanitize = require('mongo-sanitize');
-const PDFDocument = require('pdfkit');
+const SANITIZE = require('mongo-sanitize');
+const PDF_DOCUMENT = require('pdfkit');
 
 exports.getDownloadPatients = async (req, res, next) => {
       try {
@@ -14,7 +14,7 @@ exports.getDownloadPDF = async (req, res, next) => {
             const patientsService = req.app.service('api/patients');
             const patients = await patientsService.find()
 
-            const doc = new PDFDocument();
+            const doc = new PDF_DOCUMENT();
             res.setHeader('Content-Disposition', 'attachment; filename=patients.pdf')
             res.setHeader('Content-Type', 'application/pdf');
 
@@ -72,67 +72,65 @@ exports.getCreatePatient = async (request, response, next) => {
 };
 
 /*
-  Description:
-  Creates a new patient after sanitizing input.
-
-  Parameters:
-  - request: Express Request Object
-  - response: Express Response Object
-  - next: Express Next Function
+  Descripción:
+  Crea un nuevo paciente en la base de datos después de sanitizar los datos de entrada.
+  Parametros:
+  - request: Objeto Express Request
+  - response: Objecto Express Response 
 */
-exports.postCreatePatient = async (req, res, next) => {
+exports.postCreatePatient = async (req, res) => {
   try {
     const sanitizedBody = {
-      Name: sanitize(req.body.Name),
-      Email: sanitize(req.body.Email),
-      Phone: sanitize(req.body.Phone),
-      Religion: sanitize(req.body.Religion),
-      Marital_Status: sanitize(req.body.Marital_Status),
-      Occupation: sanitize(req.body.Occupation),
-      Education: sanitize(req.body.Education),
-      Emergency_Contact: sanitize(req.body.Emergency_Contact),
-      Weight: sanitize(req.body.Weight),
-      Height: sanitize(req.body.Height),
-      Date_of_Birth: sanitize(req.body.Date_of_Birth),
-      Reason_for_Consultation: sanitize(req.body.Reason_for_Consultation),
+      Name: SANITIZE(req.body.Name),
+      Email: SANITIZE(req.body.Email),
+      Phone: SANITIZE(req.body.Phone),
+      Religion: SANITIZE(req.body.Religion),
+      Marital_Status: SANITIZE(req.body.Marital_Status),
+      Occupation: SANITIZE(req.body.Occupation),
+      Education: SANITIZE(req.body.Education),
+      Emergency_Contact: SANITIZE(req.body.Emergency_Contact),
+      Weight: SANITIZE(req.body.Weight),
+      Height: SANITIZE(req.body.Height),
+      Date_of_Birth: SANITIZE(req.body.Date_of_Birth),
+      Reason_for_Consultation: SANITIZE(req.body.Reason_for_Consultation),
 
       Pathological_Antecedents: {
-        Systematic_Diseases: sanitize(req.body.Pathological_Antecedents?.Systematic_Diseases),
-        Surgical_Antecedents: sanitize(req.body.Pathological_Antecedents?.Surgical_Antecedents),
-        Hospitalizations: sanitize(req.body.Pathological_Antecedents?.Hospitalizations),
-        Pregnancies: sanitize(req.body.Pathological_Antecedents?.Pregnancies),
-        Musculoskeletal_Problems: sanitize(req.body.Pathological_Antecedents?.Musculoskeletal_Problems),
-        Transfusions: sanitize(req.body.Pathological_Antecedents?.Transfusions),
-        Allergies: sanitize(req.body.Pathological_Antecedents?.Allergies),
+        Systematic_Diseases: SANITIZE(req.body.Pathological_Antecedents?.Systematic_Diseases),
+        Surgical_Antecedents: SANITIZE(req.body.Pathological_Antecedents?.Surgical_Antecedents),
+        Hospitalizations: SANITIZE(req.body.Pathological_Antecedents?.Hospitalizations),
+        Pregnancies: SANITIZE(req.body.Pathological_Antecedents?.Pregnancies),
+        Musculoskeletal_Problems: SANITIZE(req.body.Pathological_Antecedents?.Musculoskeletal_Problems),
+        Transfusions: SANITIZE(req.body.Pathological_Antecedents?.Transfusions),
+        Allergies: SANITIZE(req.body.Pathological_Antecedents?.Allergies),
       },
 
       Non_Pathological_Antecedents: {
-        Alcohol: sanitize(req.body.Non_Pathological_Antecedents?.Alcohol),
-        Other_Substances: sanitize(req.body.Non_Pathological_Antecedents?.Other_Substances),
-        Food: sanitize(req.body.Non_Pathological_Antecedents?.Food),
-        Hidration: sanitize(req.body.Non_Pathological_Antecedents?.Hidration),
-        Physical_Activity: sanitize(req.body.Non_Pathological_Antecedents?.Physical_Activity),
-        Laboral_Activity: sanitize(req.body.Non_Pathological_Antecedents?.Laboral_Activity),
-        Sleep: sanitize(req.body.Non_Pathological_Antecedents?.Sleep),
-        Stress: sanitize(req.body.Non_Pathological_Antecedents?.Stress),
+        Alcohol: SANITIZE(req.body.Non_Pathological_Antecedents?.Alcohol),
+        Other_Substances: SANITIZE(req.body.Non_Pathological_Antecedents?.Other_Substances),
+        Food: SANITIZE(req.body.Non_Pathological_Antecedents?.Food),
+        Hidration: SANITIZE(req.body.Non_Pathological_Antecedents?.Hidration),
+        Physical_Activity: SANITIZE(req.body.Non_Pathological_Antecedents?.Physical_Activity),
+        Laboral_Activity: SANITIZE(req.body.Non_Pathological_Antecedents?.Laboral_Activity),
+        Sleep: SANITIZE(req.body.Non_Pathological_Antecedents?.Sleep),
+        Stress: SANITIZE(req.body.Non_Pathological_Antecedents?.Stress),
       },
 
       Family_History: {
-        Arterial_Hypertension: sanitize(req.body.Family_History?.Arterial_Hypertension),
-        Diabetes: sanitize(req.body.Family_History?.Diabetes),
-        Cancer: sanitize(req.body.Family_History?.Cancer),
-        Acute_Myocardial_Infarction: sanitize(req.body.Family_History?.Acute_Myocardial_Infarction),
-        Cerebrovascular_Accident: sanitize(req.body.Family_History?.Cerebrovascular_Accident),
-        Viral_Respiratory_Infections: sanitize(req.body.Family_History?.Viral_Respiratory_Infections),
-        Thyroid_Disease: sanitize(req.body.Family_History?.Thyroid_Disease),
-        Rheumatoid_Arthritis_Lupus: sanitize(req.body.Family_History?.Rheumatoid_Arthritis_Lupus),
-        Neuromuscular_Disorders: sanitize(req.body.Family_History?.Neuromuscular_Disorders),
-        Down_Syndrome: sanitize(req.body.Family_History?.Down_Syndrome),
-        Mental_Disorders: sanitize(req.body.Family_History?.Mental_Disorders),
-        Other: sanitize(req.body.Family_History?.Other),
+        Arterial_Hypertension: SANITIZE(req.body.Family_History?.Arterial_Hypertension),
+        Diabetes: SANITIZE(req.body.Family_History?.Diabetes),
+        Cancer: SANITIZE(req.body.Family_History?.Cancer),
+        Acute_Myocardial_Infarction: SANITIZE(req.body.Family_History?.Acute_Myocardial_Infarction),
+        Cerebrovascular_Accident: SANITIZE(req.body.Family_History?.Cerebrovascular_Accident),
+        Viral_Respiratory_Infections: SANITIZE(req.body.Family_History?.Viral_Respiratory_Infections),
+        Thyroid_Disease: SANITIZE(req.body.Family_History?.Thyroid_Disease),
+        Rheumatoid_Arthritis_Lupus: SANITIZE(req.body.Family_History?.Rheumatoid_Arthritis_Lupus),
+        Neuromuscular_Disorders: SANITIZE(req.body.Family_History?.Neuromuscular_Disorders),
+        Down_Syndrome: SANITIZE(req.body.Family_History?.Down_Syndrome),
+        Mental_Disorders: SANITIZE(req.body.Family_History?.Mental_Disorders),
+        Other: SANITIZE(req.body.Family_History?.Other),
       }
     };
-
+    // Crea el nuevo paciente con datos sanitizados
     await req.app.service('api/patients').create(sanitizedBody);
     res.redirect('/patients');
   } catch (error) {
@@ -153,7 +151,7 @@ exports.postCreatePatient = async (req, res, next) => {
 */
 exports.getEditPatient = async (request, response, next) => {
   try {
-    const id = sanitize(request.params.id);
+    const id = SANITIZE(request.params.id);
     const patient = await request.app.service('api/patients').get(id);
     response.render('patients-edit', { patient });
   } catch (error) {
@@ -173,10 +171,10 @@ exports.getEditPatient = async (request, response, next) => {
 */
 exports.patchEditPatient = async (request, response, next) => {
   try {
-    const id = sanitize(request.params.id);
-    const idPatient = sanitize(request.body.IdPatient);
-    const email = sanitize(request.body.Email);
-    const name = sanitize(request.body.Name);
+    const id = SANITIZE(request.params.id);
+    const idPatient = SANITIZE(request.body.IdPatient);
+    const email = SANITIZE(request.body.Email);
+    const name = SANITIZE(request.body.Name);
 
     await request.app.service('api/patients').patch(id, {
       IdPatient: idPatient,
@@ -202,7 +200,7 @@ exports.patchEditPatient = async (request, response, next) => {
 */
 exports.deletePatient = async (request, response, next) => {
   try {
-    const id = sanitize(request.params.id);
+    const id = SANITIZE(request.params.id);
     await request.app.service('api/patients').remove(id);
     response.redirect('/patients');
   } catch (error) {

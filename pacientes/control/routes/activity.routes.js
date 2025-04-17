@@ -20,7 +20,7 @@ router.get('/add-patient', (request, response) => {
 */
 
 router.post(
-  "/add-patient",
+  "/registrar_paciente",
   [
     body("Name").trim().escape().notEmpty(),
     body("Email").optional().isEmail().normalizeEmail(),

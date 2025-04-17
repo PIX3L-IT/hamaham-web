@@ -2,13 +2,16 @@
 <html>
 <head>
   <title>Crear paciente</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link 
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet">
   <link rel="stylesheet" href="../../public/css/pacientes/pacientes.css">
 </head>
 <body class="bg-light">
   <div class="container mt-5 mb-5">
     <h2 class="p-4 flex-grow-1">Agregar nuevo paciente</h2>
-    <form method="POST" action="/pacientes/add-patient" class="bg-white p-4 rounded shadow-sm">
+    <form method="POST" action="/pacientes/registrar_paciente" 
+    class="bg-white p-4 rounded shadow-sm">
       <h4 class="text-start mb-4"> Historial Clínico</h4>
       <div class="mb-3">
         <label class="form-label">Nombre del(@) paciente*:</label>
@@ -22,12 +25,12 @@
 
       <div class="mb-3">
         <label class="form-label">Teléfono:</label>
-        <input name="Phone" type="number" class="form-control" />
+        <input name="Phone" type="number" class="form-control"/>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Fecha de Registro:</label>
-        <input name="Registration_Date" type="date" class="form-control" />
+        <input name="Registration_Date" type="date" class="form-control"/>
       </div>
 
       <div class="mb-3">
@@ -73,7 +76,9 @@
 
       <div class="mb-3">
         <label class="form-label">Motivo de Consulta:</label>
-        <textarea name="Reason_for_Consultation" class="form-control"></textarea>
+        <textarea 
+          name="Reason_for_Consultation" class="form-control">
+        </textarea>
 
       </div>
 
@@ -83,152 +88,174 @@
 
       <div class="mb-3">
         <label class="form-label">Enfermedades sistemáticas:</label>
-        <textarea name="Pathological_Antecedents[Systematic_Diseases]" class="form-control"></textarea>
+        <textarea 
+          name="Pathological_Antecedents[Systematic_Diseases]" 
+          class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Eventos quirúrgicos:</label>
-        <textarea name="Pathological_Antecedents[Surgical_Antecedents]" class="form-control"></textarea>
+        <textarea name="Pathological_Antecedents[Surgical_Antecedents]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Embarazos:</label>
-        <textarea name="Pathological_Antecedents[Pregnancies]" class="form-control"></textarea>
+        <textarea name="Pathological_Antecedents[Pregnancies]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Hospitalizaciones:</label>
-        <textarea name="Pathological_Antecedents[Hospitalizations]" class="form-control"></textarea>
+        <textarea name="Pathological_Antecedents[Hospitalizations]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Lesiones músculoesqueléticas:</label>
-        <textarea name="Pathological_Antecedents[Musculoskeletal_Problems]" class="form-control"></textarea>
+        <textarea name="Pathological_Antecedents[Musculoskeletal_Problems]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Transfusiones:</label>
-        <textarea name="Pathological_Antecedents[Transfusions]" class="form-control"></textarea>
+        <textarea name="Pathological_Antecedents[Transfusions]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Alergias:</label>
-        <textarea name="Pathological_Antecedents[Allergies]" class="form-control"></textarea>
+        <textarea name="Pathological_Antecedents[Allergies]"
+        class="form-control"></textarea>
       </div>      
 
       <h4 class="text-start mb-4">Antecedentes No Patológicos</h4>
       
       <div class="mb-3">
         <label class="form-label">Alcohol:</label>
-        <textarea name="Non_Pathological_Antecedents[Alcohol]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Alcohol]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Otras sustancias:</label>
-        <textarea name="Non_Pathological_Antecedents[Other_Substances]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Other_Substances]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Comida:</label>
-        <textarea name="Non_Pathological_Antecedents[Food]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Food]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Hidratación:</label>
-        <textarea name="Non_Pathological_Antecedents[Hidration]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Hidration]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Actividad física:</label>
-        <textarea name="Non_Pathological_Antecedents[Physical_Activity]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Physical_Activity]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Actividad laboral:</label>
-        <textarea name="Non_Pathological_Antecedents[Laboral_Activity]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Laboral_Activity]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Sueño:</label>
-        <textarea name="Non_Pathological_Antecedents[Sleep]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Sleep]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label class="form-label">Estrés:</label>
-        <textarea name="Non_Pathological_Antecedents[Stress]" class="form-control"></textarea>
+        <textarea name="Non_Pathological_Antecedents[Stress]"
+        class="form-control"></textarea>
       </div>      
 
       <h4 class="text-start mb-4"> Antecedentes Heredofamiliares</h4>
 
       <div class="mb-3">
         <label>Hipertensión Arterial:</label>
-        <textarea name="Family_History[Arterial_Hypertension]" class="form-control"></textarea>
+        <textarea name="Family_History[Arterial_Hypertension]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Diabetes:</label>
-        <textarea name="Family_History[Diabetes]" class="form-control"></textarea>
+        <textarea name="Family_History[Diabetes]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Cáncer:</label>
-        <textarea name="Family_History[Cancer]" class="form-control"></textarea>
+        <textarea name="Family_History[Cancer]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Infarto Agudo al Miocardio (IAM):</label>
-        <textarea name="Family_History[Acute_Myocardial_Infarction]" class="form-control"></textarea>
+        <textarea name="Family_History[Acute_Myocardial_Infarction]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Evento Vascular Cerebral (EVC):</label>
-        <textarea name="Family_History[Cerebrovascular_Accident]" class="form-control"></textarea>
+        <textarea name="Family_History[Cerebrovascular_Accident]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Infección Respiratoria Viral (IRV):</label>
-        <textarea name="Family_History[Viral_Respiratory_Infections]" class="form-control"></textarea>
+        <textarea name="Family_History[Viral_Respiratory_Infections]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Enfermedades Tiroideas:</label>
-        <textarea name="Family_History[Thyroid_Disease]" class="form-control"></textarea>
+        <textarea name="Family_History[Thyroid_Disease]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Artritis Reumatoide / Lupus:</label>
-        <textarea name="Family_History[Rheumatoid_Arthritis_Lupus]" class="form-control"></textarea>
+        <textarea name="Family_History[Rheumatoid_Arthritis_Lupus]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Trastornos Neuromusculares:</label>
-        <textarea name="Family_History[Neuromuscular_Disorders]" class="form-control"></textarea>
+        <textarea name="Family_History[Neuromuscular_Disorders]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Síndrome de Down:</label>
-        <textarea name="Family_History[Down_Syndrome]" class="form-control"></textarea>
+        <textarea name="Family_History[Down_Syndrome]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Trastornos Mentales:</label>
-        <textarea name="Family_History[Mental_Disorders]" class="form-control"></textarea>
+        <textarea name="Family_History[Mental_Disorders]"
+        class="form-control"></textarea>
       </div>
       
       <div class="mb-3">
         <label>Otro:</label>
-        <textarea name="Family_History[Other]" class="form-control"></textarea>
+        <textarea name="Family_History[Other]"
+        class="form-control"></textarea>
       </div>      
     
       <button type="submit" class="btn btn-primary">Guardar</button>
       <a href="/pacientes" class="btn btn-secondary">Cancelar</a>
-    
-  
     </form>
-
-
-
-
   </div>
 </body>
 </html>

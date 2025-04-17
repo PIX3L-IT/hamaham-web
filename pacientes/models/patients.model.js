@@ -1,6 +1,14 @@
-const mongoose = require("mongoose");
+const MOONGOOSE = require("mongoose");
 
-const patientSchema = new mongoose.Schema(
+/*
+  Creamos el modelo de lo que seran los datos clínicos de los pacientes
+  de Mariela 
+  
+  Esto lo hacemos para que el body sepa lo que tiene que recibir y como
+  lo tiene que guardar en la base de datos
+*/
+
+const PATIENT_SCHEMA = new mongoose.Schema(
   {
     Name: { type: String, required: true },
     Email: { type: String },
@@ -57,6 +65,6 @@ const patientSchema = new mongoose.Schema(
   }
 );
 
-const Patient = mongoose.model("patient", patientSchema);
+const PATIENT = MOONGOOSE.model("patient", PATIENT_SCHEMA);
 
-module.exports = Patient;
+module.exports = PATIENT;
