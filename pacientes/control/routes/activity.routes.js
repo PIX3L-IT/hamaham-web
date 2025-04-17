@@ -2,7 +2,7 @@ const EXPRESS = require('express');
 const ROUTER = EXPRESS.Router();
 const PATIENT = require('../../models/patients.model');
 
-const { BODY, VALIDATION_RESULT } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const SANITIZE = require('mongo-sanitize');
 
 /*
@@ -22,13 +22,13 @@ ROUTER.get('/registrar_paciente', (request, response) => {
 ROUTER.post(
   "/registrar_paciente",
   [
-    BODY("Name").trim().escape().notEmpty(),
-    BODY("Email").optional().isEmail().normalizeEmail(),
-    BODY("Phone").optional().isNumeric(),
+    body("Name").trim().escape().notEmpty(),
+    body("Email").optional().isEmail().normalizeEmail(),
+    body("Phone").optional().isNumeric(),
     // puedes seguir agregando validaciones aquí si lo deseas
   ],
   async (req, res) => {
-    const errors = VALIDATION_RESULT(req);
+    const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res
@@ -40,23 +40,23 @@ ROUTER.post(
       const sanitizeField = (field) =>
         field ? SANITIZE(field, { allowedTags: [], allowedAttributes: {} }) : undefined;
 
-      const Pathological_Antecedents = req.BODY.Pathological_Antecedents || {};
-      const Non_Pathological_Antecedents = req.BODY.Non_Pathological_Antecedents || {};
-      const Family_History = req.BODY.Family_History || {}; 
+      const Pathological_Antecedents = req.body.Pathological_Antecedents || {};
+      const Non_Pathological_Antecedents = req.body.Non_Pathological_Antecedents || {};
+      const Family_History = req.body.Family_History || {}; 
 
       const newPatient = new PATIENT({
-        Name: sanitizeField(req.BODY.Name),
-        Email: sanitizeField(req.BODY.Email),
-        Phone: req.BODY.Phone ? parseInt(req.BODY.Phone) : undefined,
-        Religion: sanitizeField(req.BODY.Religion),
-        Marital_Status: sanitizeField(req.BODY.Marital_Status),
-        Occupation: sanitizeField(req.BODY.Occupation),
-        Education: sanitizeField(req.BODY.Education),
-        Emergency_Contact: sanitizeField(req.BODY.Emergency_Contact),
-        Weight: req.BODY.Weight ? parseFloat(req.BODY.Weight) : undefined,
-        Height: req.BODY.Height ? parseFloat(req.BODY.Height) : undefined,
-        Date_of_Birth: req.BODY.Date_of_Birth,
-        Reason_for_Consultation: sanitizeField(req.BODY.Reason_for_Consultation),
+        Name: sanitizeField(req.body.Name),
+        Email: sanitizeField(req.body.Email),
+        Phone: req.body.Phone ? parseInt(req.body.Phone) : undefined,
+        Religion: sanitizeField(req.body.Religion),
+        Marital_Status: sanitizeField(req.body.Marital_Status),
+        Occupation: sanitizeField(req.body.Occupation),
+        Education: sanitizeField(req.body.Education),
+        Emergency_Contact: sanitizeField(req.body.Emergency_Contact),
+        Weight: req.body.Weight ? parseFloat(req.body.Weight) : undefined,
+        Height: req.body.Height ? parseFloat(req.body.Height) : undefined,
+        Date_of_Birth: req.body.Date_of_Birth,
+        Reason_for_Consultation: sanitizeField(req.body.Reason_for_Consultation),
 
         Pathological_Antecedents: {
           Systematic_Diseases: sanitizeField(Pathological_Antecedents?.Systematic_Diseases),
