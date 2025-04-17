@@ -8,7 +8,7 @@ const MOONGOOSE = require("mongoose");
   lo tiene que guardar en la base de datos
 */
 
-const PATIENT_SCHEMA = new mongoose.Schema(
+const PATIENT_SCHEMA = new MOONGOOSE.Schema(
   {
     Name: { type: String, required: true },
     Email: { type: String },
