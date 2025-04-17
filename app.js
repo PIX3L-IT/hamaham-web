@@ -68,14 +68,8 @@ app.configure(mongooseConfig);
 // Configura Feathers REST (crea endpoints /serviceName)
 app.configure(rest());
 
-const patientService = require('./pacientes/control/services/patient.service');
-patientService(app);
-
-const permissionService = require('./usuarios/control/services/permission.service');
-permissionService(app);
-
-const userService = require('./usuarios/control/services/user.service');
-userService(app);
+const { services } = require('./util/index.services');
+app.configure(services);
 
 // Hooks globales de Feathers 
 app.hooks({
