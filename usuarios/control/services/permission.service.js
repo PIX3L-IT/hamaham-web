@@ -13,14 +13,7 @@ function permissionService(app) {
     };
   
     // Montamos el servicio en /api/permissions
-    const service = app.use('/api/permissions', new PermissionsService(options));
-  
-    // Aquí se añaden los hooks necesarios 
-    service.hooks({
-      before: {}
-    });
+    app.use('/api/permissions', new PermissionsService(options));
   }
   
-  module.exports = {
-    permissionService
-  };
+  module.exports = permissionService;

@@ -30,7 +30,7 @@ app.configure(configuration());
 
 const { logger } = require('./config/logger');
 const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
-const { logError } = require('./pacientes/control/hooks/log-error');
+const { logError } = require('./hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
 const dotenv = require("dotenv").config()
 
@@ -69,12 +69,8 @@ app.configure(mongooseConfig);
 // Configura Feathers REST (crea endpoints /serviceName)
 app.configure(rest());
 
-const { patientService } = require('./pacientes/control/services/patient.service');
-app.configure(patientService);
-const { userService } = require('./usuarios/control/services/user.service');
-app.configure(userService);
-const { permissionService } = require('./usuarios/control/services/permission.service');
-app.configure(permissionService);
+const { services } = require('./util/index.services');
+app.configure(services);
 
 // Hooks globales de Feathers 
 app.hooks({
