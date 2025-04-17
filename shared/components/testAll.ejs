@@ -1,4 +1,5 @@
- <!-- Aquí se deben incluir todos los componentes cuando estén listos -->
+<link rel="stylesheet" href="/css/rectangle.css">
+<!-- Aquí se deben incluir todos los componentes cuando estén listos -->
 
 <!DOCTYPE html>
 <html lang="es">
@@ -8,17 +9,25 @@
 
 </head>
 
+<!-- title -->
+
 <%- include('title.component.ejs', {
     text: 'Componente title'
 }) %>
+
+<!-- subtitle -->
 
 <%- include('subtitle.component.ejs', {
     text: 'Componente subtitle'
 }) %>
 
+<!-- subsubtitle -->
+
 <%- include('subsubtitle.component.ejs', {
     text: 'Componente subsubtitle'
 }) %>
+
+<!-- text -->
 
 <%- include('text.component.ejs', {
     text: 'Componente text en negritas',
@@ -29,6 +38,8 @@
     text: 'Componente text normal',
     bold: ''
 }) %>
+
+<!-- searchbar -->
 
 <%- include('searchbar.component.ejs') %>
 
@@ -44,6 +55,84 @@
         href: '/patients/create'
 }) %>
 
+ <!-- rectangle -->
+
+<div class="row-of-rectangles">
+
+<% const subsubtitle = include('subsubtitle.component.ejs', { 
+    text: 'Componente rectangle' 
+}); %>
+
+<% const text = include('text.component.ejs', {
+    text: 'Componente rectangle blanco',
+    bold: ''
+}) %>
+
+<%- include('rectangle.component.ejs', {
+    color: 'white',
+    content: `
+      ${subsubtitle}
+      ${text}
+    `
+}) %>
+
+<%- include('rectangle.component.ejs', {
+    color: 'pink',
+    content: `
+      ${subsubtitle}
+      ${text}
+    `
+}) %>
+
+</div>
+
+<!-- textInput -->
+<form>
+  <%- include('textInput.component.ejs', {
+    color: 'white',
+    name: 'alohol',
+    placeholder: 'Frecuencia de ingesta de alcohol',
+    required: true
+  }) %>
+
+  <%- include('textInput.component.ejs', {
+    color: 'pink',
+    name: 'alohol',
+    placeholder: 'Frecuencia de ingesta de alcohol',
+    required: true
+  }) %>
+  <button>Botón para probar el required de los input de texto</button>
+</form>
+
+
+<!-- intInput -->
+
+<form>
+    <%- include('intInput.component.ejs', {
+      color: 'white',
+      name: 'edad1',
+      placeholder: 'Edad del paciente',
+      min: 0,
+      max: 100,
+      required: true
+    }) %>
+    <button type="submit">Botón para probar min y max</button>
+</form>
+
+<!-- dateInput -->
+
+<form>
+    <%- include('dateInput.component.ejs', {
+      color: 'white',
+      name: 'fecha',
+      placeholder: 'fecha de nacimiento',
+      min: '1920-12-01',
+      max: '2025-04-16',
+      required: true
+    }) %>
+    <button type="submit">Botón para probar min y max</button>
+</form>
+  
 
 </body>
 </html>
