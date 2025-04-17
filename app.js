@@ -120,9 +120,6 @@ app.get('/', (req, res) => {
 app.get('/test/components', (req, res) => {
   res.render('testAll');
 });
-app.get('/test/sidebar', (req, res) => {
-  res.render('sidebar');
-});
 
 app.get('/js/firebase-config.js', (req, res, next) => {
   res.type('application/javascript');
