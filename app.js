@@ -105,10 +105,8 @@ const userRoutes = require('./usuarios/control/routes/user.routes');
 app.use('/usuarios', userRoutes);
 const clientsRoutes = require('./facturas/control/routes/clients.routes');
 app.use('/clientes', clientsRoutes);
-const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
-app.use('/pacientes', pacientesRoutes); 
-const clinicaRoutes = require('./clinica/control/routes/clinica.routes');
-app.use('/clinica', clinicaRoutes);
+const clinicRoutes = require('./clinica/control/routes/clinica.routes');
+app.use('/clinica', clinicRoutes);
 
 
 // Redirección opcional si alguien entra a /
