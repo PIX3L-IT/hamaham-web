@@ -3,8 +3,6 @@ const { NotAuthenticated } = require('@feathersjs/errors');
 const cookie = require('cookie');
 
 async function firebaseAuthHook(context) {
-
-    if (context.path == 'api/users'){
         
         const headers = context.params.headers || {};
     
@@ -55,9 +53,6 @@ async function firebaseAuthHook(context) {
     
         // Si llegamos hasta aquí, algo salió mal (por ejemplo, cookie inválida y no hay ID token)
         throw new NotAuthenticated('Authentication failed');
-    } else {
-        return context;
-    }
 }
 
 

@@ -15,14 +15,8 @@ function patientService(app) {
 
   
   // Montamos el servicio en /api/patients
-  const service = app.use('/api/patients', new PatientsService(options));
+  app.use('/api/patients', new PatientsService(options));
   
-
-    service.hooks({
-      before: {}
-    });
-  }
+}
   
-  module.exports = {
-    patientService
-  };
+module.exports = patientService;
