@@ -66,7 +66,7 @@ app.use(methodOverride('_method'));
 app.use((req, res, next) => {
   let key = 'home';           // por defecto no resalta nada en el sidebar (home no está en el sidebar)
 
-  if      (req.path.startsWith('/patients'))       key = 'patients';
+  if      (req.path.startsWith('/pacientes'))       key = 'patients';
   else if (req.path.startsWith('/facturas') ||
            req.path.startsWith('/clientes'))       key = 'invoices';
   else if (req.path.startsWith('/estadisticas'))   key = 'stats';
@@ -99,10 +99,10 @@ app.hooks({
   error: {}
 });
 
-const patientsSession = require('./pacientes/control/routes/patients.routes');
-app.use('/patients', patientsSession);
-const userSession = require('./usuarios/control/routes/user.routes');
-app.use('/users', userSession);
+const patientsRoutes = require('./pacientes/control/routes/patients.routes');
+app.use('/pacientes', patientsRoutes);
+const userRoutes = require('./usuarios/control/routes/user.routes');
+app.use('/usuarios', userRoutes);
 const clientsRoutes = require('./facturas/control/routes/clients.routes');
 app.use('/clientes', clientsRoutes);
 const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
