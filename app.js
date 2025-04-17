@@ -62,6 +62,20 @@ app.use(compression());
 // Method Override
 app.use(methodOverride('_method'));
 
+//Middleware: determina enlace activo
+app.use((req, res, next) => {
+  let key = 'home';           // por defecto no resalta nada en el sidebar (home no está en el sidebar)
+
+  if      (req.path.startsWith('/pacientes'))       key = 'patients';
+  else if (req.path.startsWith('/facturas') ||
+           req.path.startsWith('/clientes'))       key = 'invoices';
+  else if (req.path.startsWith('/estadisticas'))   key = 'stats';
+  else if (req.path.startsWith('/usuarios'))       key = 'users';
+
+  res.locals.activeRoute = key; /* disponible en TODAS las vistas */
+  next();
+});
+
 // Conecta Mongoose
 app.configure(mongooseConfig);
 
@@ -85,16 +99,14 @@ app.hooks({
   error: {}
 });
 
-const patientsSession = require('./pacientes/control/routes/patients.routes');
-app.use('/patients', patientsSession);
-const userSession = require('./usuarios/control/routes/user.routes');
-app.use('/users', userSession);
+const patientsRoutes = require('./pacientes/control/routes/patients.routes');
+app.use('/pacientes', patientsRoutes);
+const userRoutes = require('./usuarios/control/routes/user.routes');
+app.use('/usuarios', userRoutes);
 const clientsRoutes = require('./facturas/control/routes/clients.routes');
 app.use('/clientes', clientsRoutes);
-const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
-app.use('/pacientes', pacientesRoutes); 
-const clinicaRoutes = require('./clinica/control/routes/clinica.routes');
-app.use('/clinica', clinicaRoutes);
+const clinicRoutes = require('./clinica/control/routes/clinica.routes');
+app.use('/clinica', clinicRoutes);
 
 
 // Redirección opcional si alguien entra a /

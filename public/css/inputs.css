@@ -23,4 +23,20 @@
     background: #FFF6F8;
 }
 
+.inputMoneyWrapper {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  margin-right: 20px;
+}
+
+.moneySymbol {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-60%);
+  color: #555;
+  font-weight: bold;
+}
+
   

@@ -7,7 +7,23 @@
   <meta charset="UTF-8" />
   <title>Visualización de componentes</title>
 
+  <!-- CSS ─────────────────────────────────────────────── -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+  <link rel="stylesheet" href="/css/button.css" />
+  <link rel="stylesheet" href="/css/searchbar.css" />
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 </head>
+
+<!-- sidebar -->
+
+<%- include('sidebar.component.ejs', {
+    userName: 'Mariela Macias'
+  }) %>
+
+<main class="main-content">
 
 <!-- title -->
 
@@ -104,6 +120,18 @@
   <button>Botón para probar el required de los input de texto</button>
 </form>
 
+<!-- emailInput -->
+
+<form>
+    <%- include('emailInput.component.ejs', {
+      color: 'white',
+      name: 'email',
+      placeholder: 'example@gmail.com',
+      required: true
+    }) %>
+    <button>Botón para probar el emailInput</button>
+</form>
+
 
 <!-- intInput -->
 
@@ -132,7 +160,31 @@
     }) %>
     <button type="submit">Botón para probar min y max</button>
 </form>
+
+<!-- costInput -->
+
+<form>
+    <%- include('costInput.component.ejs', {
+      color: 'white',
+      name: 'costoConsulta',
+      placeholder: 'Costo de la sesión',
+      min: 0,
+      max: 10000,
+      required: true
+    }) %>
+
+    <%- include('costInput.component.ejs', {
+        color: 'pink',
+        name: 'costoConsulta2',
+        placeholder: 'Costo de la sesión',
+        min: 0,
+        max: 10000,
+        required: true
+      }) %>
+    <button type="submit">Botón para probar costInput</button>
+</form>
   
+</main>
 
 </body>
 </html>

@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/inputs.css">
+
+<% /*
+  Componente: inputText
+
+  Parámetros:
+  - String name         → nombre del input (atributo "name")
+  - String placeholder  → texto guía
+  - String color        → color del rectangulo
+  - Boolean required    → si el campo es obligatorio
+*/ %>
+
+
+<input
+  class="standardInput <%= color || '' %>"
+  id="<%= name %>"
+  name="<%= name %>"
+  type="email"
+  placeholder="<%= placeholder || '' %>"
+  <%= String(required) === 'true' ? 'required' : '' %>
+/>
+
