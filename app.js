@@ -62,6 +62,20 @@ app.use(compression());
 // Method Override
 app.use(methodOverride('_method'));
 
+//Middleware: determina enlace activo
+app.use((req, res, next) => {
+  let key = 'home';           // por defecto no resalta nada en el sidebar (home no está en el sidebar)
+
+  if      (req.path.startsWith('/patients'))       key = 'patients';
+  else if (req.path.startsWith('/facturas') ||
+           req.path.startsWith('/clientes'))       key = 'invoices';
+  else if (req.path.startsWith('/estadisticas'))   key = 'stats';
+  else if (req.path.startsWith('/usuarios'))       key = 'users';
+
+  res.locals.activeRoute = key; /* disponible en TODAS las vistas */
+  next();
+});
+
 // Conecta Mongoose
 app.configure(mongooseConfig);
 
@@ -105,6 +119,9 @@ app.get('/', (req, res) => {
 // Ruta de visualización de componentes gráficos
 app.get('/test/components', (req, res) => {
   res.render('testAll');
+});
+app.get('/test/sidebar', (req, res) => {
+  res.render('sidebar');
 });
 
 app.get('/js/firebase-config.js', (req, res, next) => {

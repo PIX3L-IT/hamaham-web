@@ -2,8 +2,24 @@
 <html>
 <head>
   <title>Lista de patients</title>
+
+    <!-- CSS ─────────────────────────────────────────────── -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/button.css" />
+    <link rel="stylesheet" href="/css/searchbar.css" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
 </head>
 <body>
+
+  <%- include('sidebar.component.ejs', {
+    userName: 'Mariela Macias',
+  }) %>
+
+<main class="main-content">
+
   <h1>patients</h1>
   <a href="/patients/create">Crear nuevo patient</a>
   <ul>
@@ -17,5 +33,7 @@
       </li>
     <% }) %>
   </ul>
+
+  <main>
 </body>
 </html>
