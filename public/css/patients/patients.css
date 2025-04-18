@@ -8,6 +8,18 @@
     src: url('/fonts/Poppins-Bold.ttf') format('truetype');
     font-weight: 200;
 } 
+@font-face{
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+.card-scroll {
+    max-height: 80vh; /* ajusta según tu diseño */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 
 .register_patient_form{
     background-color: transparent;
@@ -19,7 +31,7 @@
     border: none;
     padding: 0 100px;
     font-size: 20px;
-    font-weight: 200;
+    font-weight: 300;
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
@@ -35,7 +47,9 @@
 .form-control{
     background-color: #FFF6F8;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    font-weight: 300;
 }
+
 
 html, body {
     height: 100%;
@@ -43,16 +57,17 @@ html, body {
     padding: 0;
     background-color: #FFF6F8;
     font-family: 'Poppins', sans-serif;
+    overflow-y: hidden;
 }
 
 h2{
     font-size: 40px;
-    font-weight: 300;
+    font-weight: 200;
     color: #FE829F;
 }
 h4{
     font-size: 30px;
-    font-weight: 300;
+    font-weight: 200;
     color: #FE829F;
 }
 
