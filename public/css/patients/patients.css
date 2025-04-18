@@ -15,41 +15,83 @@
 }
 
 .card-scroll {
-    max-height: 80vh; /* ajusta según tu diseño */
+    max-height: 80vh; /* Ajusta según tu diseño */
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+/* Fondo del scrollbar (track) */
+.card-scroll::-webkit-scrollbar {
+    width: 4px; /* Ancho del scrollbar */
+}
+
+/* Color del fondo del track */
+.card-scroll::-webkit-scrollbar-track {
+    background-color: #FFD6DD; /* Puedes ajustar este si quieres contraste */
+}
+
+/* Scroll (thumb) – lo que se arrastra */
+.card-scroll::-webkit-scrollbar-thumb {
+    background-color: #FE829F; /* Tu color deseado */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
 
 
 .register_patient_form{
     background-color: transparent;
 }
 
-.register_patient_button{
+.register_patient_button {
     background-color: #FE829F;
     color: white;
     border: none;
-    padding: 0 100px;
-    font-size: 20px;
+    width: 271px;
+    height: 41px;
+    font-size: 16px;
     font-weight: 300;
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
 }
 
-
 .form-label {
-    font-size: 20px;
+    font-size: 20px;    
     font-weight: 200;
     color: #FE829F;
 }
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 1000px) {
+    .form-label {
+        font-size: 16px;    
+        font-weight: 200;
+        color: #FE829F;
+    }
+}
+
+@media (max-width: 768px) {
+    .register_patient_button {
+        width: 100%;
+        margin: 0 auto; /* Esto lo centra horizontalmente */
+        display: block; /* Asegura que el margin funcione correctamente */
+    }
+    
+    
+}
+
 
 .form-control{
     background-color: #FFF6F8;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     font-weight: 300;
+    border-radius: 20px;
+
 }
 
+.card{
+    border-radius: 20px;
+}
 
 html, body {
     height: 100%;
@@ -57,7 +99,6 @@ html, body {
     padding: 0;
     background-color: #FFF6F8;
     font-family: 'Poppins', sans-serif;
-    overflow-y: hidden;
 }
 
 h2{
