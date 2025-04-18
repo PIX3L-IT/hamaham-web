@@ -25,7 +25,6 @@ ROUTER.post(
     body("Name").trim().escape().notEmpty(),
     body("Email").optional().isEmail().normalizeEmail(),
     body("Phone").optional().isNumeric(),
-    // puedes seguir agregando validaciones aquí si lo deseas
   ],
   async (req, res) => {
     const errors = validationResult(req);
