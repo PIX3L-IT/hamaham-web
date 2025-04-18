@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/css/rectangle.css">
 <!-- Aquí se deben incluir todos los componentes cuando estén listos -->
 
 <!DOCTYPE html>
@@ -12,11 +11,12 @@
   <link rel="stylesheet" href="/css/sidebar.css" />
   <link rel="stylesheet" href="/css/button.css" />
   <link rel="stylesheet" href="/css/searchbar.css" />
+  <link rel="stylesheet" href="/css/rectangle.css">
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 </head>
-
+<body>
 <!-- sidebar -->
 
 <%- include('sidebar.component.ejs', {
@@ -183,8 +183,68 @@
       }) %>
     <button type="submit">Botón para probar costInput</button>
 </form>
-  
-</main>
 
+<!-- backArrow -->
+
+<%- include('backArrow.component.ejs') %>
+
+<!-- check -->
+<%const text1 = include('text.component.ejs', {
+  text: 'Facturacion automatica. Mucho texto de prueba para ver como se va a ver',
+  bold: ''
+}) %>
+
+<%- include('check.component.ejs', {
+  id: 'aceptarTerminos',
+  text: `${text1}`,
+  checked: false
+}) %>
+
+<!-- row -->
+<% const title = include('subtitle.component.ejs', { text: 'Confirmación' }); %>
+<% const inputCost = include('costInput.component.ejs', {
+  color: 'white',
+  name: 'costoConsulta',
+  placeholder: 'Costo de la sesión',
+  min: 0,
+  max: 10000,
+  required: true
+}) %>
+<%const checkPrueba = include('check.component.ejs', {
+  id: 'checkprueba',
+  text: `${text1}`,
+  checked: false
+}) %>
+
+<%- include('rowComponents.component.ejs', {
+  content: `${title}${checkPrueba}${inputCost}`
+}) %>
+
+<!-- modal -->
+
+<% const idModal = 'PonElIdDeTuModalAqui'; %>
+<button id="btnMostrarModal" data-modal-id="<%= idModal %>">Mostrar modal</button>
+
+
+<%const button1 = include('button.component.ejs', {
+  id: 'button1',
+  text: '➕ Crear nuevo paciente',
+  href: '/test/components'
+}) %>
+<%const button2 = include('button.component.ejs', {
+  id: 'button2',
+  text: '➕ Cancelar',
+  href: '/test/components'
+}) %>
+<%const buttons = include('rowComponents.component.ejs', {
+  content: `${button1}${button2}`
+}) %>
+
+<%- include('modal.component.ejs', {
+  id: `${idModal}`,
+  content: `${title}${checkPrueba}${inputCost}${buttons}`
+}) %>
+
+</main>
 </body>
 </html>
