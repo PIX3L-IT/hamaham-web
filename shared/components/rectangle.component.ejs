@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/rectangle.css">
+
+<% /*
+  Componente: rectangle
+
+  Parámetros:
+  - String color            → color del rectangulo
+  - Content content         → contenido HTML que va dentro del rectángulo
+*/ %>
+
+<div class="rectangle <%= color || '' %>">
+  <%- content %>
+</div>

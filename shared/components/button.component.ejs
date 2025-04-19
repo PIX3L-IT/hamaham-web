@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/button.css">
+
+<% /*
+  Componente: Botón reutilizable
+
+  Parámetros:
+  - String id
+  - String text
+  - String href          (si se pasa, renderiza <a>)
+  - String type          (type del botón si no hay href)
+  - String extraClasses  (clases adicionales; opcional)
+*/ %>
+
+<% const baseClasses =
+     'custom-btn ' + (typeof extraClasses !== 'undefined' ? extraClasses : ''); %>
+
+<% if (href) { %>
+  <a
+    id="<%= id || '' %>"
+    href="<%= href %>"
+    class="<%= baseClasses.trim() %>"
+  >
+    <%= text %>
+  </a>
+<% } else { %>
+  <button
+    id="<%= id || '' %>"
+    type="<%= type || 'button' %>"
+    class="<%= baseClasses.trim() %>"
+  >
+    <%= text %>
+  </button>
+<% } %>

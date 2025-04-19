@@ -29,10 +29,8 @@ app.use(helmet({
 app.configure(configuration());
 
 const { logger } = require('./config/logger');
-const { firebaseHook } = require('./usuarios/control/hooks/firebase-auth');
-const { logError } = require('./pacientes/control/hooks/log-error');
+const { logError } = require('./shared/hooks/log-error');
 const { mongooseConfig } = require('./config/mongoose');
-const dotenv = require("dotenv").config()
 
 // Cargar variables de entorno
 require('dotenv').config();
@@ -40,6 +38,7 @@ require('dotenv').config();
 // Configurar el motor de vistas y archivos estáticos
 app.set('view engine', 'ejs');
 app.set('views', [
+  path.join(__dirname, 'shared', 'components'),
   path.join(__dirname, 'usuarios', 'views'),
   path.join(__dirname, 'pacientes', 'views'),
   path.join(__dirname, 'facturas', 'views'),
@@ -62,6 +61,20 @@ app.use(compression());
 
 // Method Override
 app.use(methodOverride('_method'));
+
+//Middleware: determina enlace activo
+app.use((req, res, next) => {
+  let key = 'home';           // por defecto no resalta nada en el sidebar (home no está en el sidebar)
+
+  if      (req.path.startsWith('/pacientes'))       key = 'patients';
+  else if (req.path.startsWith('/facturas') ||
+           req.path.startsWith('/clientes'))       key = 'invoices';
+  else if (req.path.startsWith('/estadisticas'))   key = 'stats';
+  else if (req.path.startsWith('/usuarios'))       key = 'users';
+
+  res.locals.activeRoute = key; /* disponible en TODAS las vistas */
+  next();
+});
 
 // Conecta Mongoose
 app.configure(mongooseConfig);
@@ -86,22 +99,24 @@ app.hooks({
   error: {}
 });
 
-const patientsSession = require('./pacientes/control/routes/patients.routes');
-app.use('/patients', patientsSession);
-const userSession = require('./usuarios/control/routes/user.routes');
-app.use('/users', userSession);
+const patientsRoutes = require('./pacientes/control/routes/patients.routes');
+app.use('/pacientes', patientsRoutes);
+const userRoutes = require('./usuarios/control/routes/user.routes');
+app.use('/usuarios', userRoutes);
 const clientsRoutes = require('./facturas/control/routes/clients.routes');
 app.use('/clientes', clientsRoutes);
-const pacientesRoutes = require('./pacientes/control/routes/activity.routes');
-app.use('/pacientes', pacientesRoutes); 
-
-const clinicaRoutes = require('./clinica/control/routes/clinica.routes');
-app.use('/clinica', clinicaRoutes);
+const clinicRoutes = require('./clinica/control/routes/clinica.routes');
+app.use('/clinica', clinicRoutes);
 
 
 // Redirección opcional si alguien entra a /
 app.get('/', (req, res) => {
   res.redirect('/pacientes/add-patient');
+});
+
+// Ruta de visualización de componentes gráficos
+app.get('/test/components', (req, res) => {
+  res.render('testAll');
 });
 
 app.get('/js/firebase-config.js', (req, res, next) => {

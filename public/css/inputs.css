@@ -1,0 +1,42 @@
+
+  .standardInput {
+    width: 400px;
+    height: 40px;
+    padding-left: 10px;
+    align-items: center;
+    border-radius: 10px;
+    border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+    background: #FFF6F8;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 10px;
+  }
+
+  .standardInput:focus {
+    outline: none;
+  }
+
+.white {
+    background: #FEFEFE;
+}
+
+.pink {
+    background: #FFF6F8;
+}
+
+.inputMoneyWrapper {
+  position: relative;
+  display: inline-block;
+  width: 400px;
+  margin-right: 20px;
+}
+
+.moneySymbol {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-60%);
+  color: #555;
+  font-weight: bold;
+}
+
+  
