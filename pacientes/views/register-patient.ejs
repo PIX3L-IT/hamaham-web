@@ -5,7 +5,6 @@
   <link 
   href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
   rel="stylesheet">
-  <link rel="stylesheet" href="/css/patients/patients.css">
   <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/sidebar.css" />
   <link rel="stylesheet" href="/css/button.css" />
@@ -15,21 +14,33 @@
 </head>
 <body class="">
   <%- include('sidebar.component.ejs', { userName: 'Mariela Macias' }) %>	
-
-  <main class="main-content">
-  <%- include('title.component.ejs', {
-      text: 'Nuevo Paciente'
-  }) %>
   
+  <form class="register_patient_form" method="POST" action="/pacientes/registrar_paciente"></form>
+  <main class="main-content">
+  
+    <div class="row">
+      <div class="col-md-6">
+        <%- include('title.component.ejs', {
+            text: 'Nuevo Paciente'
+        }) %>
+      </div>
+    
+      <div class="col-md-6 d-flex justify-content-end align-items-end">
+        <%- include('button.component.ejs', {
+          id: 'btnListaPacientes',
+          text: 'Guardar',
+          href: '/pacientes'
+        }) %>
+      </div>
+    </div>
+    
   
   <div class="container mt-5 mb-5">    
-    <form class="register_patient_form" method="POST" action="/pacientes/registrar_paciente" 
-    class="p-4 rounded shadow-sm">
-
     <div class="row-of-rectangles">
       <!--Tarjeta Izquierda-->
       <%- include('rectangle.component.ejs', {
         color: 'white',
+        height: 100,
         content: `
             ${include('subsubtitle.component.ejs', {
               text: 'Datos del paciente'
@@ -131,6 +142,7 @@
 
         <%- include('rectangle.component.ejs', {
           color: 'white',
+          height: 80,
           content: `
           ${include('subsubtitle.component.ejs', {
             text: 'Valoración médica'
@@ -536,85 +548,6 @@
         }) %>
       
       </div>
-
-        <!--Tarjeta Derecha
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Diabetes:</label>
-              <textarea name="Family_History[Diabetes]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Cáncer:</label>
-              <textarea name="Family_History[Cancer]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class=" col-md-6">
-              <label class="form-label">Infarto Agudo al Miocardio (IAM):</label>
-              <textarea name="Family_History[Acute_Myocardial_Infarction]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Evento Vascular Cerebral (EVC):</label>
-              <textarea name="Family_History[Cerebrovascular_Accident]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Infección Respiratoria Viral (IRV):</label>
-              <textarea name="Family_History[Viral_Respiratory_Infections]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Enfermedades Tiroideas:</label>
-              <textarea name="Family_History[Thyroid_Disease]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Artritis Reumatoide / Lupus:</label>
-              <textarea name="Family_History[Rheumatoid_Arthritis_Lupus]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Trastornos Neuromusculares:</label>
-              <textarea name="Family_History[Neuromuscular_Disorders]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Síndrome de Down:</label>
-              <textarea name="Family_History[Down_Syndrome]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Trastornos Mentales:</label>
-              <textarea name="Family_History[Mental_Disorders]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Otro:</label>
-              <textarea name="Family_History[Other]"
-              class="form-control"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Razón de la Consulta:</label>
-              <textarea 
-                name="Reason_for_Consultation" class="form-control">
-              </textarea>
-            
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  -->  
   </form>
   </main>
 </body>

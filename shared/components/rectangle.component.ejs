@@ -7,8 +7,17 @@
   Parámetros:
   - String color            → color del rectangulo
   - Content content         → contenido HTML que va dentro del rectángulo
+  - Altura de la card     → altura del rectángulo
 */ %>
 
-<div class="rectangle <%= color || '' %>">
+<%
+  function formatHeight(h) {
+    if (!h) return 'auto';
+    const num = Number(h);
+    return isNaN(num) ? h : num + 'vh';
+  }
+%>
+
+<div class="rectangle <%= color || '' %>" style="max-height: <%= formatHeight(height) %>">
   <%- content %>
 </div>
