@@ -111,7 +111,7 @@ app.use('/clinica', clinicRoutes);
 
 // Redirección opcional si alguien entra a /
 app.get('/', (req, res) => {
-  res.redirect('/pacientes/add-patient');
+  res.redirect('/home');
 });
 
 // Ruta de visualización de componentes gráficos
