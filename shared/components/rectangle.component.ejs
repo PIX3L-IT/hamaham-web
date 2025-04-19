@@ -5,19 +5,24 @@
   Componente: rectangle
 
   Parámetros:
-  - String color            → color del rectangulo
+  - String color            → color del rectángulo
   - Content content         → contenido HTML que va dentro del rectángulo
-  - Altura de la card     → altura del rectángulo
+  - Altura de la card       → altura del rectángulo
+  - Boolean flexible        → si es true, el rectángulo se adapta al tamaño del contenido
 */ %>
 
 <%
+  const isFlexible = typeof flexible !== 'undefined' && flexible;
+
   function formatHeight(h) {
     if (!h) return 'auto';
     const num = Number(h);
     return isNaN(num) ? h : num + 'vh';
   }
+
+  const style = isFlexible ? '' : `max-height: ${formatHeight(height)};`;
 %>
 
-<div class="rectangle <%= color || '' %>" style="max-height: <%= formatHeight(height) %>">
+<div class="rectangle <%= color || '' %>" style="<%= style %>">
   <%- content %>
 </div>
