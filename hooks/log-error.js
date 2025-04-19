@@ -1,5 +1,5 @@
 // log-error.js
-const { logger } = require('../../config/logger');
+const { logger } = require('../config/logger');
 
 async function logError(context, next) {
   try {

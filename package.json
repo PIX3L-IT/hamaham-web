@@ -50,7 +50,6 @@
     "@firebase/auth": "^1.10.0",
     "axios": "^1.8.4",
     "body-parser": "^2.2.0",
-    "bootstrap": "^5.3.5",
     "compression": "^1.8.0",
     "cookie": "^1.0.2",
     "dotenv": "^16.4.7",

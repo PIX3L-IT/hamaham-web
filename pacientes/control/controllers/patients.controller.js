@@ -92,7 +92,7 @@ exports.postCreatePatient = async (request, response, next) => {
       Name: name
     });
 
-    response.redirect('/pacientes');
+    response.redirect('/patients');
   } catch (error) {
     console.error(error.message);
     response.status(500).render('500');
@@ -141,7 +141,7 @@ exports.patchEditPatient = async (request, response, next) => {
       Name: name
     });
 
-    response.redirect('/pacientes');
+    response.redirect('/patients');
   } catch (error) {
     console.error(error.message);
     response.status(500).render('500');
@@ -161,7 +161,7 @@ exports.deletePatient = async (request, response, next) => {
   try {
     const id = sanitize(request.params.id);
     await request.app.service('api/patients').remove(id);
-    response.redirect('/pacientes');
+    response.redirect('/patients');
   } catch (error) {
     console.error(error.message);
     response.status(500).render('500');
