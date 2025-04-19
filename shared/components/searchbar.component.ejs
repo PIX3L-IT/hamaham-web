@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/searchbar.css">
+
+<% /*
+  Componente: Barra de búsqueda
+
+  Parámetros:
+  - String idForm          → id opcional del <form>
+  - String action          → ruta a la que envía la búsqueda
+  - String queryName       → nombre del parámetro (default: 'q')
+  - String placeholder     → texto del input (default: 'Buscar…')
+  - String value           → valor inicial del input
+  - String extraClasses    → clases adicionales para el contenedor
+*/ %>
+
+<% /*
+  Componente: Barra de búsqueda
+  Explicación: Si la vista que lo incluye no pasa parámetros,
+  se usan estos valores por defecto para evitar ReferenceError.
+*/ %>
+
+<%
+// Desestructuramos de "locals" con defaults.
+// "locals" es el objeto que recibe EJS con los parámetros del include.
+const {
+  idForm = '',
+  action = '#',
+  queryName = 'q',
+  placeholder = 'Buscar…',
+  value = '',
+  extraClasses = ''
+} = locals;
+%>
+
+<form
+  id="<%= idForm %>"
+  action="<%= action %>"
+  method="GET"
+  class="search-bar <%= extraClasses %>"
+>
+  <input
+    class="search-input"
+    type="text"
+    name="<%= queryName %>"
+    placeholder="<%= placeholder %>"
+    value="<%= value %>"
+    aria-label="Barra de búsqueda"
+  />
+
+  <button class="search-btn" type="submit" aria-label="Buscar">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M15.5 14h-.79l-.28-.27a6 6 0 1 0-.71.71l.27.28v.79l5 5 1.5-1.5-5-5zm-6 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+    </svg>
+  </button>
+</form>

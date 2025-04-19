@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/text.css">
+
+<% /*
+  Componente: text
+
+  Parámetros:
+  - String text            → texto que quiero mostrar
+  - String bold            → texto en negritas?
+*/ %>
+
+<h1 class="text <%= bold ? 'bold' : '' %>"><%= text %></h1>
+

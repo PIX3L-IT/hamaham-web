@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/css/modal.css">
+
+<% /*
+  Componente: modal
+  Parámetros:
+  - String id → ID único para el modal
+  - Content content → contenido HTML dentro del modal-box
+*/ %>
+
+<div class="modal-overlay" id="<%= id %>">
+  <div class="modal-box">
+    <%- content %>
+  </div>
+</div>
+
+<script src="/js/modal.js"></script>

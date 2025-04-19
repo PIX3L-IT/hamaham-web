@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/inputs.css">
+
+<% /*
+  Componente: inputText
+
+  Parámetros:
+  - String name         → nombre del input (atributo "name")
+  - String placeholder  → texto guía
+  - String color        → color del rectángulo
+  - Int min             → mínima cantidad aceptada
+  - Int max             → máxima cantidad aceptada
+  - Boolean required    → si es obligatorio
+*/ %>
+
+<input
+  class="standardInput <%= color || '' %>"
+  id="<%= name %>"
+  name="<%= name %>"
+  type="number"
+  placeholder="<%= placeholder || '' %>"
+  min="<%= min %>"
+  max="<%= max %>"
+  <%= String(required) === 'true' ? 'required' : '' %>
+/>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('input[type="number"]').forEach(input => {
+      input.addEventListener('input', () => {
+        if (input.value === '') return;
+
+        const val = parseFloat(input.value);
+        const min = parseFloat(input.min);
+        const max = parseFloat(input.max);
+
+        if (!isNaN(min) && val < min) input.value = min;
+        if (!isNaN(max) && val > max) input.value = max;
+      });
+
+      // Opcional: bloquear teclas si se pasa del rango usando flechas
+      input.addEventListener('keydown', (e) => {
+        const val = parseFloat(input.value || '0');
+        const min = parseFloat(input.min);
+        const max = parseFloat(input.max);
+
+        if (e.key === 'ArrowDown' && !isNaN(min) && val <= min) {
+          e.preventDefault();
+        }
+        if (e.key === 'ArrowUp' && !isNaN(max) && val >= max) {
+          e.preventDefault();
+        }
+      });
+    });
+  });
+</script>
