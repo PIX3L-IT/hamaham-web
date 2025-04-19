@@ -26,182 +26,518 @@
     <form class="register_patient_form" method="POST" action="/pacientes/registrar_paciente" 
     class="p-4 rounded shadow-sm">
 
-    <div class="row align-items-center">
-      <div class="col">
-      </div>
-      <div class="col-12 col-md-auto">
-        </div>
-      </div>
-    
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <!--Tarjeta Izquierda-->
-          <div class="card p-4 card-scroll"">
-            <div class="form-section izquierda">
+    <div class="row-of-rectangles">
+      <!--Tarjeta Izquierda-->
+      <%- include('rectangle.component.ejs', {
+        color: 'white',
+        content: `
+            ${include('subsubtitle.component.ejs', {
+              text: 'Datos del paciente'
+          })}      
+          ${include('text.component.ejs', {
+            text: 'Nombre completo:',
+            bold: ''
+          })}
+          ${include('textInput.component.ejs', {
+            color: 'pink',
+            name: 'Name',
+            placeholder: 'Nombre completo',
+            required: true
+          })}
+          ${include('text.component.ejs', {
+                  text: 'Email:',
+                  bold: ''
+          })}
+          ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Email',
+                  placeholder: 'Email',
+                  required: false
+          })}
+          ${include('text.component.ejs', {
+            text: 'Teléfono:',
+            bold: ''
+        })}
+          ${include('textInput.component.ejs', {
+            color: 'pink',
+            name: 'Phone',
+            placeholder: 'Telefono',
+            required: false
+          })}
+          ${include('text.component.ejs', {
+            text: 'Escolaridad:',
+            bold: ''
+        })}
+          ${include('textInput.component.ejs', {
+            color: 'pink',
+            name: 'Education',
+            placeholder: 'Escolaridad',
+            required: false
+          })}
+          ${include('text.component.ejs', {
+            text: 'Empleo:',
+            bold: ''
+        })}
+          ${include('textInput.component.ejs', {
+            color: 'pink',
+            name: 'Occupation',
+            placeholder: 'Empleo',
+            required: false
+          })}
+          ${include('text.component.ejs', {
+            text: 'Estado Civil:',
+            bold: ''
+        })}
+          ${include('textInput.component.ejs', {
+            color: 'pink',
+            name: 'Marital_Status',
+            placeholder: 'Estado Civil',
+            required: false
+          })}
+          ${include('text.component.ejs', {
+            text: 'Religión:',
+            bold: ''
+        })}
+          ${include('textInput.component.ejs', {
+            color: 'pink',
+            name: 'Religion',
+            placeholder: 'Religion',
+            required: false
+          })}
+          ${include('text.component.ejs', {
+                  text: 'Contacto de Emergencia:',
+                  bold: ''
+          })}
+          ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Emergency_Contact',
+                  placeholder: 'Contacto de Emergencia',
+                  required: false
+          })}
+          ${include('text.component.ejs', {
+                  text: 'Fecha de Nacimiento:',
+                  bold: ''
+          })}
+          ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Date_of_Birth',
+                  type:'date',
+                  placeholder: 'Fecha de Nacimiento',
+                  required: false
+          })}          
+        `
+    }) %>
+<!-- Tarjeta Derecha con estilo igualado -->
 
-              <h4 class="text-start mb-4"> Datos del paciente</h4>
-              <div class="mb-3">
-                <label class="form-label">Nombre del(@) paciente*:</label>
-                <input name="Name" required class="form-control" />
-              </div>
-              
-              <div class="mb-3">
-                <label class="form-label">Email:</label>
-                <input name="Email" class="form-control" />
-              </div>
-              
-              <div class="mb-3">
-                <label class="form-label">Teléfono:</label>
-                <input name="Phone" type="number" class="form-control"/>
-              </div>
-              
-              <div class="mb-3">
-                <label class="form-label">Escolaridad:</label>
-                <input name="Education" class="form-control" />
-              </div>
-              
-              <div class="mb-3">
-                <label class="form-label">Empleo:</label>
-                <input name="Occupation" class="form-control" />
-              </div>
-              
-              <div class="mb-3">
-                <label class="form-label">Estado Civil:</label>
-                <input name="Marital_Status" class="form-control" />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Religión:</label>
-                <input name="Religion" class="form-control" />
-              </div>
-        
-        
-              <div class="mb-3">
-                <label class="form-label">Contacto de Emergencia:</label>
-                <input name="Emergency_Contact" class="form-control" />
-              </div>
-        
-              
-              <div class="mb-3">
-                <label class="form-label">Fecha de Nacimiento:</label>
-                <input name="Date_of_Birth" type="date" class="form-control" />
-              </div>
-            </div>
-            <div class="form-text text-end mb-3">* Campos obligatorios</div>
-          </div>
-        </div>
-
-        <!--Tarjeta Derecha-->
-        <div class="col-md-8">
-          <div class="card p-4 card-scroll"">
+        <%- include('rectangle.component.ejs', {
+          color: 'white',
+          content: `
+          ${include('subsubtitle.component.ejs', {
+            text: 'Valoración médica'
+        })}   
             <div class="row">
-              <h4 class="text-start mb-4"> Valoración médica</h4>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Peso(kg):</label>
-                <input name="Weight" type="number" class="form-control" />
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Peso (kg):',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Weight',
+                  type: 'number',
+                  placeholder: 'Ej. 60',
+                  required: false
+                })}
               </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Altura(m):</label>
-                <input name="Height" type="number" class="form-control" />
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Altura (m):',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Height',
+                  type: 'number',
+                  placeholder: 'Ej. 1.70',
+                  required: false
+                })}
               </div>
-            
-            <div class=" col-md-6 mb-3">
-              <label class="form-label">Enfermedades sistemáticas:</label>
-              <textarea 
-                name="Pathological_Antecedents[Systematic_Diseases]" 
-                class="form-control"></textarea>
+            </div>
+
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Enfermedades sistemáticas:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Systematic_Diseases]',
+                  placeholder: 'Ej. Diabetes, Hipertensión',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Eventos quirúrgicos:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Surgical_Antecedents]',
+                  placeholder: 'Ej. Apendicitis, Cesárea',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Embarazos:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Pregnancies]',
+                  placeholder: 'Ej. 2',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Hospitalizaciones:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Hospitalizations]',
+                  placeholder: 'Ej. 1',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Lesiones musculoesqueléticas:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Musculoskeletal_Problems]',
+                  placeholder: 'Ej. Fractura de brazo',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Transfusiones:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Transfusions]',
+                  placeholder: 'Ej. 1',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Alergias:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Pathological_Antecedents[Allergies]',
+                  placeholder: 'Ej. Penicilina',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Frecuencia de ingesta de alcohol:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Alcohol]',
+                  placeholder: 'Ej. 2 veces por semana',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Otras sustancias:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Other_Substances]',
+                  placeholder: 'Ej. Tabaco, marihuana',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Hábitos alimenticios:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Food]',
+                  placeholder: 'Ej. Vegetariano, vegano',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Hábitos de hidratación:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Hidration]',
+                  placeholder: 'Ej. 2 litros al día',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Actividad física:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Physical_Activity]',
+                  placeholder: 'Ej. 3 veces por semana',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Actividad laboral:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Laboral_Activity]',
+                  placeholder: 'Ej. Sedentario, activo',
+                  required: false
+                })}
+              </div>
+              <div class="col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Sueño:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Sleep]',
+                  placeholder: 'Ej. 8 horas al día',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Estrés:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Non_Pathological_Antecedents[Stress]',
+                  placeholder: 'Ej. Bajo, moderado, alto',
+                  required: false
+                })}
+              </div>
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Hipertensión Arterial:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Arterial_Hypertension]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+            </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Diabetes:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Diabetes]',
+                  placeholder: 'Ej. Si mi padre',
+                  required: false
+                })}
+              </div>
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Cáncer:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Cancer]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Infarto Agudo al Miocardio (IAM):',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Acute_Myocardial_Infarction]',
+                  placeholder: 'Ej. Si mi abuelo',
+                  required: false
+                })}
+              </div>
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Evento Vascular Cerebral (EVC):',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Cerebrovascular_Accident]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Infección Respiratoria Viral (IRV):',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Viral_Respiratory_Infections]',
+                  placeholder: 'Ej. Si mi padre',
+                  required: false
+                })}
+              </div>
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Enfermedades Tiroideas:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Thyroid_Disease]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Artritis Reumatoide / Lupus:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Rheumatoid_Arthritis_Lupus]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+              </div>
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Trastornos Neuromusculares:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Neuromuscular_Disorders]',
+                  placeholder: 'Ej. Si mi padre',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Síndrome de Down:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Down_Syndrome]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+              </div>
+              <div class = "col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Trastornos Mentales:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Mental_Disorders]',
+                  placeholder: 'Ej. Si mi padre',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Otro:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Family_History[Other]',
+                  placeholder: 'Ej. Si mi madre',
+                  required: false
+                })}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-md-6">
+                ${include('text.component.ejs', {
+                  text: 'Razon de la Consulta:',
+                  bold: ''
+                })}
+                ${include('textInput.component.ejs', {
+                  color: 'pink',
+                  name: 'Reason_for_Consultation',
+                  placeholder: 'Razon de la consulta',
+                  required: false
+                })}
+              </div>
             </div>
             
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Eventos quirúrgicos:</label>
-              <textarea name="Pathological_Antecedents[Surgical_Antecedents]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Embarazos:</label>
-              <textarea name="Pathological_Antecedents[Pregnancies]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Hospitalizaciones:</label>
-              <textarea name="Pathological_Antecedents[Hospitalizations]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Lesiones musculoesqueléticas:</label>
-              <textarea name="Pathological_Antecedents[Musculoskeletal_Problems]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Transfusiones:</label>
-              <textarea name="Pathological_Antecedents[Transfusions]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Alergias:</label>
-              <textarea name="Pathological_Antecedents[Allergies]"
-              class="form-control"></textarea>
-            </div>      
-                        
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Frecuencia de ingesta de alcohol:</label>
-              <textarea name="Non_Pathological_Antecedents[Alcohol]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Otras sustancias:</label>
-              <textarea name="Non_Pathological_Antecedents[Other_Substances]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Hábitos alimenticios:</label>
-              <textarea name="Non_Pathological_Antecedents[Food]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Habitos de hidratación:</label>
-              <textarea name="Non_Pathological_Antecedents[Hidration]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Actividad física:</label>
-              <textarea name="Non_Pathological_Antecedents[Physical_Activity]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Actividad laboral:</label>
-              <textarea name="Non_Pathological_Antecedents[Laboral_Activity]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Sueño:</label>
-              <textarea name="Non_Pathological_Antecedents[Sleep]"
-              class="form-control"></textarea>
-            </div>
-            
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Estrés:</label>
-              <textarea name="Non_Pathological_Antecedents[Stress]"
-              class="form-control"></textarea>
-            </div>      
-          
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Hipertensión Arterial:</label>
-              <textarea name="Family_History[Arterial_Hypertension]"
-              class="form-control"></textarea>
-            </div>
-            
+
+          `
+        }) %>
+      
+      </div>
+
+        <!--Tarjeta Derecha
             <div class="col-md-6 mb-3">
               <label class="form-label">Diabetes:</label>
               <textarea name="Family_History[Diabetes]"
@@ -278,9 +614,8 @@
         </div>
       </div>
     </div>
-    </form>
-
-  
-  </div>
+  -->  
+  </form>
+  </main>
 </body>
 </html>

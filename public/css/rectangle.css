@@ -1,10 +1,33 @@
 .rectangle {
+    max-height: 80vh; /* Ajusta según tu diseño */
+    overflow-y: auto;
+    overflow-x: hidden;
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     margin: 20px;
     width: 100%;
   }
+
+
+/* Fondo del scrollbar (track) */
+.rectangle::-webkit-scrollbar {
+  width: 4px; /* Ancho del scrollbar */
+}
+
+/* Color del fondo del track */
+.rectangle::-webkit-scrollbar-track {
+  background-color: #FFD6DD; /* Puedes ajustar este si quieres contraste */
+}
+
+/* Scroll (thumb) – lo que se arrastra */
+.rectangle::-webkit-scrollbar-thumb {
+  background-color: #FE829F; /* Tu color deseado */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+
+
 
 .white {
     background: #FEFEFE;
